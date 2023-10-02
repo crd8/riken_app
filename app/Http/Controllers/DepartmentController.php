@@ -28,7 +28,11 @@ class DepartmentController extends Controller
         if ($request()->query('sort')) {
             $attribute = request()->query('sort');
             $sort_order = 'ASC';
-            if (strncmp($attribute))
+            if (strncmp($attribute, '-', 1) === 0) {
+                $sort_order = 'DESC';
+                $attribute = substr($attribute, 1);
+            }
+            $departments->orderBy($attribute, $sort_order);
         }
     }
 }
