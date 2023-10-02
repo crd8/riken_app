@@ -25,6 +25,7 @@ class DepartmentController extends Controller
             $departments->where('name', 'Like', '%' . request()->input('search') . '%');
         }
 
+        $sort = request()->query('sort', 'name');
         if ($request()->query('sort')) {
             $attribute = request()->query('sort');
             $sort_order = 'ASC';
@@ -34,5 +35,6 @@ class DepartmentController extends Controller
             }
             $departments->orderBy($attribute, $sort_order);
         }
+        
     }
 }
