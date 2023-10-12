@@ -81,9 +81,9 @@
                 <tbody>
                   @foreach ($roles as $role)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $role->name }}
-                    </th>
+                    </td>
                     <td class="px-6 py-4">
                       {{ Carbon\Carbon::parse($role->created_at)->format('l, d F Y, H:i A') }}
                     </td>
@@ -94,14 +94,14 @@
                       <a href="{{ route('role.show', $role->id) }}" class="font-medium text-sky-600 dark:text-sky-500 hover:underline">
                         {{ __('Show') }}
                       </a>
-                    @canany(['role edit', 'role delete'])
-                      <a href="{{ route('role.edit', $role->id) }}" class="font-medium text-amber-600 dark:text-amber-500 hover:underline">
-                        {{ __('Edit') }}
-                      </a>
-                      <button class="font-medium text-red-600 dark:text-red-500 hover:underline" data-modal-toggle="popup-modal{{ $role->id }}" data-modal-target="popup-modal{{ $role->id }}">
-                        {{ __('Delete') }}
-                      </button>
-                    @endcanany
+                      @canany(['role edit', 'role delete'])
+                        <a href="{{ route('role.edit', $role->id) }}" class="font-medium text-amber-600 dark:text-amber-500 hover:underline">
+                          {{ __('Edit') }}
+                        </a>
+                        <button class="font-medium text-red-600 dark:text-red-500 hover:underline" data-modal-toggle="popup-modal{{ $role->id }}" data-modal-target="popup-modal{{ $role->id }}">
+                          {{ __('Delete') }}
+                        </button>
+                      @endcanany
                     </td>
                   </tr>
                   @endforeach

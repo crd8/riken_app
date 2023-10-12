@@ -59,12 +59,12 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" class="px-6 py-3">
+                      {{ __('Code') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                       <a href="{{ route('department.index', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $departments->currentPage()]) }}">
                         {{ __('Department Name') }} {!! ($sort === 'name' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
                       </a>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                      {{ __('Code') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
                       <a href="{{ route('department.index', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $departments->currentPage()]) }}">
@@ -84,11 +84,11 @@
                 <tbody>
                   @foreach ($departments as $department)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      {{ $department->name }}
-                    </th>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $department->code }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ $department->name }}
                     </td>
                     <td class="px-6 py-4">
                       {{ Carbon\Carbon::parse($department->created_at)->format('l, d F Y, H:i A') }}
@@ -96,15 +96,19 @@
                     <td class="px-6 py-4">
                       {{ Carbon\Carbon::parse($department->updated_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    @canany(['department edit', 'department delete'])
                     <td class="flex items-center px-6 py-4 space-x-3">
-                      <a href="{{ route('department.edit', $department->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                      <a href="{{ route('department.show', $department->id) }}" class="font-medium text-sky-600 dark:text-sky-500 hover:underline">
+                        {{ __('Show') }}
+                      </a>
+                      @canany(['department edit', 'department delete'])
+                      <a href="{{ route('department.edit', $department->id) }}" class="font-medium text-amber-600 dark:text-amber-500 hover:underline">
                         {{ __('Edit') }}
                       </a>
                       <button class="font-medium text-red-600 dark:text-red-500 hover:underline" data-modal-toggle="popup-modal{{ $department->id }}" data-modal-target="popup-modal{{ $department->id }}">
                         {{ __('Delete') }}
                       </button>
-                    @endcanany
+                      @endcanany
+                    </td>
                   </tr>
                   @endforeach
                 </tbody>
