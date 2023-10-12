@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
@@ -29,9 +30,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = (new User)->newQuery();
+            $users = (new User)->newQuery();
+
         if (request()->has('search')) {
-            $users->where('name', 'Like', '%' . request()->input('search') . '%')->orWhere('email', 'Like', '%' . request()->input('search') . '%' );
+            $searchTerm = '%' . request()->input('search') . '%';
+            $users->where(function($query) use ($searchTerm) {
+                $query->where('name', 'like', $searchTerm)
+                      ->orWhere('email', 'like', $searchTerm)
+                      ->orWhereHas('department', function ($query) use ($searchTerm) {
+                          $query->where('name', 'like', $searchTerm);
+                      });
+            });
         }
 
         $sort = request()->query('sort', 'name');
@@ -52,8 +61,43 @@ class UserController extends Controller
             $users->latest('created_at');
         }
 
-        $users = $users->paginate(10);
-        return view('user.index', compact('users', 'sort', 'order'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $users = $users->with('department')->paginate(1);
+
+        return view('user.index', compact('users', 'sort', 'order'));
+        
+        // $users = (new User)->newQuery();
+        // if (request()->has('search')) {
+        //     $searchTerm = '%' . request()->input('search') . '%';
+        //     $users->where(function($query) use ($searchTerm) {
+        //         $query->where('name', 'like', $searchTerm)
+        //               ->orWhere('email', 'like', $searchTerm)
+        //               ->orWhere('department_id', 'like', $searchTerm);
+        //     });
+        // }
+        // // if (request()->has('search')) {
+        // //     $users->where('name', 'Like', '%' . request()->input('search') . '%')->orWhere('email', 'Like', '%' . request()->input('search') . '%' );
+        // // }
+
+        // $sort = request()->query('sort', 'name');
+        // if (request()->query('sort')) {
+        //     $attribute = request()->query('sort');
+        //     $sort_order = 'ASC';
+        //     if (strncmp($attribute, '-', 1) === 0) {
+        //         $sort_order = 'DESC';
+        //         $attribute = substr($attribute, 1);
+        //     }
+        //     $users->orderBy($attribute, $sort_order);
+        // }
+
+        // $order = request()->query('order', 'latest');
+        // if ($order === 'oldest') {
+        //     $users->oldest('created_at');
+        // } else {
+        //     $users->latest('created_at');
+        // }
+
+        // $users = $users->paginate(10);
+        // return view('user.index', compact('users', 'sort', 'order'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -62,7 +106,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('user.create', compact('roles'));
+        $departments = Department::all();
+        return view('user.create', compact('roles', 'departments'));
     }
 
     /**
@@ -95,8 +140,9 @@ class UserController extends Controller
     public function show(User $user)
     {
         $roles = Role::all();
+        $departments = Department::all();
         $userHasRoles = array_column(json_decode($user->roles, true), 'id');
-        return view('user.show', compact('user', 'roles', 'userHasRoles'));
+        return view('user.show', compact('user', 'roles', 'userHasRoles','departments'));
     }
 
     /**
@@ -105,8 +151,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
+        $departments = Department::all();
         $userHasRoles = array_column(json_decode($user->roles, true), 'id');
-        return view('user.edit', compact('user', 'roles', 'userHasRoles'));
+        return view('user.edit', compact('user', 'roles', 'userHasRoles', 'departments'));
     }
 
     /**
@@ -117,12 +164,14 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-            'password' => ['nullable', 'confirmed', Password::defaults()]
+            'password' => ['nullable', 'confirmed', Password::defaults()],
+            'department' => ['required']
         ]);
 
         $user->update([
             'name' => $request->name,
-            'email' => $request->email
+            'email' => $request->email,
+            'department_id' => $request->department
         ]);
         if ($request->password) {
             $user->update([

@@ -74,4 +74,52 @@ class DepartmentController extends Controller
 
         return redirect()->route('department.index')->with('message', 'Department '. $request->name . ' created successfully');
     }
+
+    /**
+     * show department
+    */
+    public function show(Department $department)
+    {
+        return view('department.show', compact('department'));
+    }
+
+    /**
+     * Show edit form department
+    */
+    public function edit(Department $department)
+    {
+        return view('department.edit', compact('department'));
+    }
+
+    /**
+     * update data department
+    */
+    public function update(Request $request, Department $department)
+    {
+        $request->validate([
+            'code' => ['required', 'string', 'max:50', 'unique:departments'],
+            'name' => ['required', 'string', 'max:90', 'unique:departments'],
+            'description' => ['required', 'string']
+        ]);
+
+        $oldDepartmentName = $department->name;
+
+        $department->update([
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return redirect()->route('department.index')->with('message', "Department {$oldDepartmentName} successfully updated to {$request->name}");
+    }
+
+    /**
+     * remove department
+    */
+    public function destroy(Department $department)
+    {
+        $nameDepartment = $department->name;
+        $department->delete();
+        return redirect()->route('department.index')->with('message', "Department {$nameDepartment} successfully deleted");
+    }
 }

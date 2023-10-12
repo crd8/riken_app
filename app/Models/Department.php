@@ -13,4 +13,12 @@ class Department extends Model
         'name',
         'description'
     ];
+
+    /**
+     * define relasi hasMany ke model User
+    */
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

@@ -81,24 +81,25 @@
                 <tbody>
                   @foreach ($permissions as $permission)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $permission->name }}
-                    </th>
+                    </td>
                     <td class="px-6 py-4">
                       {{ Carbon\Carbon::parse($permission->created_at)->format('l, d F Y, H:i A') }}
                     </td>
                     <td class="px-6 py-4">
                       {{ Carbon\Carbon::parse($permission->updated_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    @canany(['permission edit', 'permission delete'])
                     <td class="flex items-center px-6 py-4 space-x-3">
-                      <a href="{{ route('permission.edit', $permission->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                      @canany(['permission edit', 'permission delete'])
+                      <a href="{{ route('permission.edit', $permission->id) }}" class="font-medium text-amber-600 dark:text-amber-500 hover:underline">
                         {{ __('Edit') }}
                       </a>
                       <button class="font-medium text-red-600 dark:text-red-500 hover:underline" data-modal-toggle="popup-modal{{ $permission->id }}" data-modal-target="popup-modal{{ $permission->id }}">
                         {{ __('Delete') }}
                       </button>
-                    @endcanany
+                      @endcanany
+                    </td>
                   </tr>
                   @endforeach
                 </tbody>

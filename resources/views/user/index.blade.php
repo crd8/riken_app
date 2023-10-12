@@ -67,6 +67,9 @@
                       {{ __('Email') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
+                      {{ __('Department') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                       <a href="{{ route('user.index', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $users->currentPage()]) }}">
                         {{ __('Created at') }} {!! ($order === 'oldest' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
                       </a>
@@ -84,11 +87,18 @@
                 <tbody>
                   @foreach ($users as $user)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $user->name }}
-                    </th>
+                    </td>
                     <td class="px-6 py-4">
                       {{ $user->email }}
+                    </td>
+                    <td class="px-6 py-4">
+                      @if ($user->department)
+                          {{ $user->department->name }}
+                      @else
+                          Belum memiliki departemen
+                      @endif
                     </td>
                     <td class="px-6 py-4">
                       {{ Carbon\Carbon::parse($user->created_at)->format('l, d F Y, H:i A') }}
@@ -97,17 +107,17 @@
                       {{ Carbon\Carbon::parse($user->updated_at)->format('l, d F Y, H:i A') }}
                     </td>
                     <td class="flex items-center px-6 py-4 space-x-3">
-                      <a href="{{ route('user.show', $user->id) }}" class="font-medium text-amber-600 dark:text-amber-500 hover:underline">
+                      <a href="{{ route('user.show', $user->id) }}" class="font-medium text-sky-600 dark:text-sky-500 hover:underline">
                         {{ __('Show') }}
                       </a>
-                    @canany(['user edit', 'user delete'])
-                      <a href="{{ route('user.edit', $user->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                        {{ __('Edit') }}
-                      </a>
-                      <button class="font-medium text-red-600 dark:text-red-500 hover:underline" data-modal-toggle="popup-modal{{ $user->id }}" data-modal-target="popup-modal{{ $user->id }}">
-                        {{ __('Delete') }}
-                      </button>
-                    @endcanany
+                      @canany(['user edit', 'user delete'])
+                        <a href="{{ route('user.edit', $user->id) }}" class="font-medium text-amber-600 dark:text-amber-500 hover:underline">
+                          {{ __('Edit') }}
+                        </a>
+                        <button class="font-medium text-red-600 dark:text-red-500 hover:underline" data-modal-toggle="popup-modal{{ $user->id }}" data-modal-target="popup-modal{{ $user->id }}">
+                          {{ __('Delete') }}
+                        </button>
+                      @endcanany
                     </td>
                   </tr>
                   @endforeach
