@@ -44,7 +44,11 @@ class DepartmentController extends Controller
         }
 
         $departments = $departments->paginate(10);
-        return view('department.index', compact('departments', 'sort', 'order'))->with('i', (request()->input('page', 1) - 1) * 5);   
+        $currentPage = $departments->currentPage();
+        $perPage = $departments->perPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
+
+        return view('department.index', compact('departments', 'sort', 'order', 'startNumber'));   
     }
 
     /**

@@ -61,9 +61,12 @@ class UserController extends Controller
             $users->latest('created_at');
         }
 
-        $users = $users->with('department')->paginate(1);
+        $users = $users->with('department')->paginate(10);
+        $currentPage = $users->currentPage();
+        $perPage = $users->perPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
 
-        return view('user.index', compact('users', 'sort', 'order'));
+        return view('user.index', compact('users', 'sort', 'order', 'startNumber'));
         
         // $users = (new User)->newQuery();
         // if (request()->has('search')) {
@@ -125,6 +128,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'department_id' => $request->department
         ]);
 
         if (!empty($request->roles)) {

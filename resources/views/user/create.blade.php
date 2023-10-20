@@ -16,27 +16,46 @@
                 {{ __('The process of creating new user in a system or app.') }}
               </p>
             </header>
-            <form class="max-w-xl" action="{{ route('user.store') }}" method="POST">
+            <form action="{{ route('user.store') }}" method="POST">
               @csrf
-              <div class="mt-6">
-                <x-input-label for="name" :value="__('Name')"/>
-                <x-text-input id="name" name="name" type="text" value="{{ old('name') }}" required autofocus autocomplete="name"/>
-                <x-input-error class="mt-2" :messages="$errors->get('name')" />
+              <div class="max-w-xl">
+                <div class="mt-6">
+                  <x-input-label for="name" :value="__('Name')"/>
+                  <x-text-input id="name" name="name" type="text" value="{{ old('name') }}" required autofocus autocomplete="name"/>
+                  <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                </div>
+                <div class="mt-6">
+                  <x-input-label for="email" :value="__('Email')"/>
+                  <x-text-input id="email" name="email" type="email" value="{{ old('email') }}" required autocomplete="email"/>
+                  <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                </div>
+                <div class="mt-6">
+                  <x-input-label for="password" :value="__('Password')"/>
+                  <x-text-input id="password" name="password" type="password" required/>
+                  <x-input-error class="mt-2" :messages="$errors->get('password')" />
+                </div>
+                <div class="mt-6">
+                  <x-input-label for="password_confirmation" :value="__('Password Confirmation')"/>
+                  <x-text-input id="password_confirmation" name="password_confirmation" type="password" required/>
+                  <x-input-error class="mt-2" :messages="$errors->get('password_confirmation')" />
+                </div>
               </div>
               <div class="mt-6">
-                <x-input-label for="email" :value="__('Email')"/>
-                <x-text-input id="email" name="email" type="email" value="{{ old('email') }}" required autocomplete="email"/>
-                <x-input-error class="mt-2" :messages="$errors->get('email')" />
-              </div>
-              <div class="mt-6">
-                <x-input-label for="password" :value="__('Password')"/>
-                <x-text-input id="password" name="password" type="password" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('password')" />
-              </div>
-              <div class="mt-6">
-                <x-input-label for="password_confirmation" :value="__('Password Confirmation')"/>
-                <x-text-input id="password_confirmation" name="password_confirmation" type="password" required/>
-                <x-input-error class="mt-2" :messages="$errors->get('password_confirmation')" />
+                <h3 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</h3>
+                <div class="grid grid-cols-4 gap-2 text-sm">
+                  @forelse ($departments as $department)
+                    <div class="flex bg-gray-100 p-2 rounded items-center">
+                      <label>
+                        <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="department" value="{{ $department->id }}">
+                        <span class="capitalize text-gray-800">
+                          {{ $department->name }}
+                        </span>
+                      </label>
+                    </div>
+                  @empty
+                    ----
+                  @endforelse
+                </div>
               </div>
               <div class="mt-6">
                 <h3 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</h3>
