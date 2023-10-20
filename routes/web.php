@@ -42,4 +42,8 @@ Route::prefix('administrator')->namespace('App\Http\Controllers')->middleware(['
     Route::resource('department', DepartmentController::class);
 });
 
+Route::prefix('plantlayout')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
+    Route::resource('area', AreaController::class);
+});
+
 require __DIR__.'/auth.php';

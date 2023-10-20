@@ -59,6 +59,9 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" class="px-6 py-3">
+                      {{ __('#') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                       <a href="{{ route('role.index', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $roles->currentPage()])}}">
                         {{ __('Role Name') }} {!! ($sort === 'name' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
                       </a>
@@ -81,6 +84,9 @@
                 <tbody>
                   @foreach ($roles as $role)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ $startNumber++ }}
+                    </td>
                     <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $role->name }}
                     </td>

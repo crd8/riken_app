@@ -27,8 +27,6 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = (new Permission)->newQuery();
-
-        
         if (request()->has('search')) {
             $permissions->where('name', 'Like', '%' . request()->input('search') . '%');
         }
@@ -53,13 +51,11 @@ class PermissionController extends Controller
         }
 
         $permissions = $permissions->paginate(10);
-        return view('permission.index', compact('permissions', 'sort', 'order'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $currentPage = $permissions->currentPage();
+        $perPage = $permissions->perPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
         
-        // get permissions
-        // $permissions = Permission::latest()->paginate(10);
-
-        // render view with permissions
-        // return view('permission.index', compact('permissions'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('permission.index', compact('permissions', 'sort', 'order', 'startNumber'));
     }
 
     /**

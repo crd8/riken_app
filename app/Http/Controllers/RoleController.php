@@ -52,7 +52,11 @@ class RoleController extends Controller
         }
 
         $roles = $roles->paginate(2);
-        return view('role.index', compact('roles', 'sort', 'order'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $currentPage = $roles->currentPage();
+        $perPage = $roles->perPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
+
+        return view('role.index', compact('roles', 'sort', 'order', 'startNumber'));
     }
 
     /**
