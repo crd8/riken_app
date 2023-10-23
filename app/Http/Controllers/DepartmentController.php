@@ -16,6 +16,7 @@ class DepartmentController extends Controller
         $this->middleware('can:department create', ['only' => ['create', 'store']]);
         $this->middleware('can:department edit', ['only' => ['edit', 'update']]);
         $this->middleware('can:department delete', ['only' => ['destroy']]);
+        $this->middleware('can:department restore', ['only' => ['trash']]);
     }
 
     public function index()
@@ -125,5 +126,15 @@ class DepartmentController extends Controller
         $nameDepartment = $department->name;
         $department->delete();
         return redirect()->route('department.index')->with('message', "Department {$nameDepartment} successfully deleted");
+    }
+
+    /**
+     * list data trashed
+    */
+    public function trash()
+    {
+        $deletedDepartments = Department::onlyTrashed()->get();
+
+        return view('department.trash', compact('deletedDepartments'));
     }
 }
