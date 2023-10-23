@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DepartmentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,11 +40,15 @@ Route::prefix('administrator')->namespace('App\Http\Controllers')->middleware(['
     Route::resource('permission', PermissionController::class);
     Route::resource('role', RoleController::class);
     Route::resource('user', UserController::class);
-    Route::resource('department', DepartmentController::class);
 });
 
-Route::prefix('plantlayout')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
+Route::prefix('business')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
+    Route::resource('department', DepartmentController::class);
     Route::resource('area', AreaController::class);
+});
+
+Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
+    Route::get('department/trash', [DepartmentController::class, 'trash'])->name('department.trash'); 
 });
 
 require __DIR__.'/auth.php';
