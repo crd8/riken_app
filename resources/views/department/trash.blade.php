@@ -5,7 +5,7 @@
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
             <a class="text-sky-700 dark:text-white bg-sky-200 hover:bg-sky-100 focus:ring-4 focus:ring-sky-100 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-900 dark:hover:bg-sky-800 focus:outline-none dark:focus:ring-sky-900" href="{{ route('department.index') }}">
-              {{ __('Back to All Departments') }}
+              {{ __('Back to All Active Departments') }}
             </a>
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
             <div class="flex justify-between">
@@ -19,7 +19,7 @@
                   </p>
                 </header>
               </div>
-              <form class="w-4/12" action="{{ route('department.index') }}" method="GET">   
+              <form class="w-4/12" action="{{ route('department.trash') }}" method="GET">   
                 <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -63,17 +63,15 @@
                       {{ __('Code') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      <a href="{{ route('department.index', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $departments->currentPage()]) }}">
-                        {{ __('Department Name') }} {!! ($sort === 'name' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
-                      </a>
+                        {{ __('Department Name') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      <a href="{{ route('department.index', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $departments->currentPage()]) }}">
-                        {{ __('Created at') }} {!! ($order === 'oldest' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
-                      </a>
+                        {{ __('Created at') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      {{ __('Deleted at') }}
+                      <a href="{{ route('department.trash', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $departments->currentPage()]) }}">
+                        {{ __('Deleted at') }} {!! ($order === 'oldest' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
+                      </a>
                     </th>
                     @canany(['department restore'])
                     <th scope="col" class="px-6 py-3">
@@ -98,14 +96,14 @@
                       {{ Carbon\Carbon::parse($department->created_at)->format('l, d F Y, H:i A') }}
                     </td>
                     <td class="px-6 py-4">
-                      {{ Carbon\Carbon::parse($department->deleted)->format('l, d F Y, H:i A') }}
+                      {{ Carbon\Carbon::parse($department->deleted_at)->format('l, d F Y, H:i A') }}
                     </td>
                     <td class="flex items-center px-6 py-4 space-x-3">
                       <a href="{{ route('department.show', $department->id) }}" class="font-medium text-sky-600 dark:text-sky-500 hover:underline">
                         {{ __('Show') }}
                       </a>
                       @canany(['department restore'])
-                      <button class="font-medium text-green-600 dark:text-green-500 hover:underline" data-modal-toggle="popup-modal{{ $department->id }}" data-modal-target="popup-modal{{ $department->id }}">
+                      <button class="font-medium text-fuchsia-600 dark:text-fuchsia-500 hover:underline" data-modal-toggle="popup-modal{{ $department->id }}" data-modal-target="popup-modal{{ $department->id }}">
                         {{ __('Restore') }}
                       </button>
                       @endcanany

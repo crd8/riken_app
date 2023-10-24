@@ -133,8 +133,22 @@ class DepartmentController extends Controller
     */
     public function trash()
     {
-        $deletedDepartments = Department::onlyTrashed()->get();
+        $departments = (new Department)->newQuery();
+        
+        $order = request()->query('order', 'latest');
 
-        return view('department.trash', compact('deletedDepartments'));
+        if ($order === 'oldest') {
+            $departments->oldest('deleted_at');
+        } else {
+            $departments->latest('deleted_at');
+        }
+
+        $departments = $departments->onlyTrashed()->paginate(10);
+        
+        $currentPage = $departments->currentPage();
+        $perPage = $departments->perPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
+
+        return view('department.trash', compact('departments', 'departments', 'order', 'startNumber'));
     }
 }
