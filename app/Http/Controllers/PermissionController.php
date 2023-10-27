@@ -86,7 +86,7 @@ class PermissionController extends Controller
             'guard_name' => 'web'
         ]);
         // redirect ke page index dan memberika notifikasi sukses
-        return redirect()->route('permission.index')->with('message', 'Permission created successfully');
+        return redirect()->route('permission.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong> created successfully");
     }
 
     /**
@@ -118,12 +118,14 @@ class PermissionController extends Controller
             
         ]);
 
+        $oldPermissionName = $permission->name;
+
         $permission->update([
             'name' => $request->name,
             'guard_name' => 'web'
         ]);
 
-        return redirect()->route('permission.index')->with('message', 'Permission update successfully');
+        return redirect()->route('permission.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$oldPermissionName}</strong> successfully updated to <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong>");
     }
 
     /**
@@ -131,7 +133,53 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
+        $namePermission = $permission->name;
         $permission->delete();
-        return redirect()->route('permission.index')->with('message', 'Permission deleted successfully');
+        return redirect()->route('permission.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$namePermission}</strong> successfully deleted to trash");
+    }
+
+    public function trash()
+    {
+        $permissions = (new Permission)->newQuery();
+        if (request()->has('search')) {
+            $permissions->where('name', 'Like', '%' . request()->input('search') . '%');
+        }
+
+        $order = request()->query('order', 'latest');
+
+        if ($order === 'oldest') {
+            $permissions->oldest('deleted_at');
+        } else {
+            $permissions->latest('deleted_at');
+        }
+
+        $permissions = $permissions->onlyTrashed()->paginate(10);
+        $currentPage = $permissions->currentPage();
+        $perPage = $permissions->perPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
+
+        return view('permission.trash', compact('permissions', 'order', 'startNumber'));
+    }
+
+    public function restore($id)
+    {
+        $permission = Permission::withTrashed()->find($id);
+        $namePermission = $permission->name;
+
+        if($permission) {
+            $permission->restore();
+            return redirect()->route('permission.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$namePermission}</strong> successfully restored");
+        }
+    }
+
+    public function destroyPermanently($id)
+    {
+        $permission = permission::withTrashed()->find($id);
+        $namepermission = $permission->name;
+
+        if ($permission) {
+            $permission->forceDelete();
+            return redirect()->route('permission.trash')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$namepermission}</strong> successfully deleted permanently");
+        }
     }
 }

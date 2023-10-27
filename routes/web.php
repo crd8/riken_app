@@ -48,7 +48,15 @@ Route::prefix('business')->namespace('App\Http\Controllers')->middleware(['auth'
 });
 
 Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
-    Route::get('department/trash', [DepartmentController::class, 'trash'])->name('department.trash'); 
+    // Department
+    Route::get('department/trash', [DepartmentController::class, 'trash'])->name('department.trash');
+    Route::get('department/restore/{id}', [DepartmentController::class, 'restore'])->name('department.restore');
+    Route::get('department/destroy-permanently/{id}', [DepartmentController::class, 'destroyPermanently'])->name('department.destroy-permanently');
+
+    // Permission
+    Route::get('permission/trash', [PermissionController::class, 'trash'])->name('permission.trash');
+    Route::get('permission/restore/{id}', [PermissionController::class, 'restore'])->name('permission.restore');
+    Route::get('permission/destroy-permanently/{id}', [PermissionController::class, 'destroyPermanently'])->name('permission.destroy-permanently');
 });
 
 require __DIR__.'/auth.php';

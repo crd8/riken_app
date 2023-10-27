@@ -7,11 +7,13 @@ namespace App\Models;
 
 // import model permission dengan alias OriginalPermission
 use Spatie\Permission\Models\Permission as OriginalPermission;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 // definisikan model dengan mewarisi dari model Permission
 class Permission extends OriginalPermission
 {
     // use HasFactory;
+    use SoftDeletes;
 
     // definisikan kolom yang dapat diisi,
     // ini untuk menentukan kolom mana yang dapat diisi saat menjalankan method store atau update
@@ -22,5 +24,5 @@ class Permission extends OriginalPermission
         'created_at'
     ];
 
-    
+    protected $dates = ['deleted_at'];
 }
