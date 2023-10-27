@@ -16,14 +16,17 @@ class DepartmentController extends Controller
         $this->middleware('can:department create', ['only' => ['create', 'store']]);
         $this->middleware('can:department edit', ['only' => ['edit', 'update']]);
         $this->middleware('can:department delete', ['only' => ['destroy']]);
-        $this->middleware('can:department restore', ['only' => ['trash']]);
     }
 
     public function index()
     {
         $departments = (new Department)->newQuery();
         if (request()->has('search')) {
-            $departments->where('name', 'Like', '%' . request()->input('search') . '%');
+            $searchTerm = request()->input('search');
+            $departments->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'like', '%' . $searchTerm . '%')
+                      ->orWhere('code', 'like', '%' . $searchTerm . '%');
+            });
         }
 
         $sort = request()->query('sort', 'name');
@@ -77,7 +80,7 @@ class DepartmentController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('department.index')->with('message', 'Department '. $request->name . ' created successfully');
+        return redirect()->route('department.index')->with('message', "Department {$request->name} created successfully");
     }
 
     /**
@@ -125,7 +128,7 @@ class DepartmentController extends Controller
     {
         $nameDepartment = $department->name;
         $department->delete();
-        return redirect()->route('department.index')->with('message', "Department {$nameDepartment} successfully deleted");
+        return redirect()->route('department.index')->with('message', "Department {$nameDepartment} successfully deleted to trash");
     }
 
     /**
@@ -134,6 +137,9 @@ class DepartmentController extends Controller
     public function trash()
     {
         $departments = (new Department)->newQuery();
+        if (request()->has('search')) {
+            $departments->where('name', 'Like', '%' . request()->input('search') . '%');
+        }
         
         $order = request()->query('order', 'latest');
 
@@ -149,6 +155,29 @@ class DepartmentController extends Controller
         $perPage = $departments->perPage();
         $startNumber = ($currentPage - 1) * $perPage + 1;
 
-        return view('department.trash', compact('departments', 'departments', 'order', 'startNumber'));
+        return view('department.trash', compact('departments', 'order', 'startNumber'));
+    }
+
+    public function restore($id)
+    {
+        $department = Department::withTrashed()->find($id);
+        $nameDepartment = $department->name;
+
+        if ($department) {
+            $department->restore();
+            return redirect()->route('department.index')->with('message', "Department {$nameDepartment} successfully restored");
+        }
+    }
+
+    public function destroyPermanently($id)
+    {
+        $department = Department::withTrashed()->find($id);
+        $nameDepartment = $department->name;
+
+        if ($department) {
+            $department->forceDelete();
+            return redirect()->route('department.trash')->with('message', "Department {$nameDepartment} successfully delete permanently");
+        }
+
     }
 }

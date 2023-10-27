@@ -6,7 +6,10 @@
           <section>
             @can('permission create')
             <a class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-600 dark:hover:bg-sky-700 focus:outline-none dark:focus:ring-sky-800" href="{{ route('permission.create') }}">
-              {{ __('Add a New Permissions') }}
+              {{ __('Add a New Permission') }}
+            </a>
+            <a class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-600 dark:hover:bg-sky-700 focus:outline-none dark:focus:ring-sky-800" href="{{ route('permission.trash') }}">
+              {{ __('Restore a Deleted Permission') }}
             </a>
             @endcan
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
@@ -44,7 +47,7 @@
                   </svg>
                   <span class="sr-only">Check icon</span>
                 </div>
-                <div class="ml-3 text-sm font-normal">{{ session()->get('message') }}</div>
+                <div class="ml-3 text-sm font-normal">{!! session()->get('message') !!}</div>
                 <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-success" aria-label="Close">
                   <span class="sr-only">Close</span>
                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
