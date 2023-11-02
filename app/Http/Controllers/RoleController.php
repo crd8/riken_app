@@ -51,7 +51,7 @@ class RoleController extends Controller
             $roles->latest('created_at');
         }
 
-        $roles = $roles->paginate(2);
+        $roles = $roles->paginate(10);
         $currentPage = $roles->currentPage();
         $perPage = $roles->perPage();
         $startNumber = ($currentPage - 1) * $perPage + 1;
@@ -85,7 +85,7 @@ class RoleController extends Controller
             $role->givePermissionTo($request->permissions);
         }
 
-        return redirect()->route('role.index')->with('message', 'Role created successfully');
+        return redirect()->route('role.index')->with('message', "Role <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong> created successfully");
     }
 
     /**
@@ -131,10 +131,12 @@ class RoleController extends Controller
             'guard_name' => 'web'
         ]);
         // mengambil input permission yang dipilih, jika tidak ada, maka $permission akan diisi array kosong
+        $oldRoleName = $role->name;
         $permissions = $request->permissions ?? [];
         // sync permission yang dicheck dan di uncheck
         $role->syncPermissions($permissions);
-        return redirect()->route('role.index')->with('message', 'Role updated successfully');
+
+        return redirect()->route('role.index')->with('message', "Role <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$oldRoleName}</strong> successfully updated to <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong>");
     }
 
     /**
@@ -142,7 +144,53 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        $nameRole = $role->name;
         $role->delete();
-        return redirect()->route('role.index')->with('message', 'Role deleted successfully');
+        return redirect()->route('role.index')->with('message', "Role <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameRole}</strong> successfully deleted to trash");
+    }
+
+    public function trash()
+    {
+        $roles = (new Role)->newQuery();
+        if (request()->has('search')) {
+            $roles->where('name', 'Like', '%' . request()->input('search') . '%');
+        }
+
+        $order = request()->query('order', 'latest');
+
+        if ($order === 'oldest') {
+            $roles->oldest('deleted_at');
+        } else {
+            $roles->latest('deleted_at');
+        }
+
+        $roles = $roles->onlyTrashed()->paginate(10);
+        $currentPage = $roles->currentPage();
+        $perPage = $roles->perPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
+        
+        return view('role.trash', compact('roles', 'order', 'startNumber'));
+    }
+
+    public function restore($id)
+    {
+        $role = Role::withTrashed()->find($id);
+        $nameRole = $role->name;
+
+        if ($role) {
+            $role->restore();
+            return redirect()->route('role.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameRole}</strong> successfully restored");
+        }
+    }
+
+    public function destroyPermanently($id)
+    {
+        $role = Role::withTrashed()->find($id);
+        $nameRole = $role->name;
+
+        if ($role) {
+            $role->forceDelete();
+            return redirect()->route('role.trash')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameRole}</strong> successfully deleted permanently");
+        }
     }
 }

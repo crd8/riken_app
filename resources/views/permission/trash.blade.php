@@ -4,23 +4,23 @@
       <div class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
-            <a class="text-sky-700 dark:text-white bg-sky-200 hover:bg-sky-100 focus:ring-4 focus:ring-sky-100 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-900 dark:hover:bg-sky-800 focus:outline-none dark:focus:ring-sky-900" href="{{ route('permission.index') }}">
+            <a class="text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-700" href="{{ route('permission.index') }}">
               {{ __('Back to All Active Permissions') }}
             </a>
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
             <div class="flex justify-between">
               <div>
                 <header class="max-w-xl">
-                  <h2 class="text-lg font-medium text-gray-900 dark:text-gray-200">
+                  <h2 class="text-gray-600 dark:text-gray-200">
                     {{ __('List of deleted Permissions') }}
                   </h2>
-                  <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                  <p class="mt-1 text-sm text-gray-400 dark:text-gray-400">
                     {{ __('This list lists all the permission are deleted in the system.') }}
                   </p>
                 </header>
               </div>
               <form class="w-4/12" action="{{ route('permission.trash') }}" method="GET">   
-                <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                <label for="default-search" class="mb-2 text-sm text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -28,7 +28,7 @@
                         </svg>
                     </div>
                     <input name="search" type="search" value="{{ request()->input('search') }}" autofocus autocomplete="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" placeholder="Search...">
-                    <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">Search</button>
+                    <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-lg text-sm px-4 py-2 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">Search</button>
                 </div>
               </form>
             </div>
@@ -80,7 +80,7 @@
                 <tbody>
                   @foreach ($permissions as $permission)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $startNumber++ }}
                     </td>
                     <td class="px-6 py-4">
@@ -94,12 +94,12 @@
                     </td>
                     <td class="flex items-center px-6 py-4 space-x-3">
                       @canany(['permission create'])
-                      <button class="font-medium text-fuchsia-600 dark:text-fuchsia-500 hover:underline" data-modal-toggle="popup-modal-restore{{ $permission->id }}" data-modal-target="popup-modal-restore{{ $permission->id }}">
+                      <button class="hover:underline" data-modal-toggle="popup-modal-restore{{ $permission->id }}" data-modal-target="popup-modal-restore{{ $permission->id }}">
                         {{ __('Restore') }}
                       </button>
                       @endcanany
                       @canany(['permission delete'])
-                      <button class="font-medium text-rose-600 dark:text-rose-500 hover:underline" data-modal-toggle="popup-modal-destroy{{ $permission->id }}" data-modal-target="popup-modal-destroy{{ $permission->id }}">
+                      <button class="hover:underline" data-modal-toggle="popup-modal-destroy{{ $permission->id }}" data-modal-target="popup-modal-destroy{{ $permission->id }}">
                         {{ __('Destroy') }}
                       </button>
                       @endcanany
@@ -134,10 +134,10 @@
           </svg>
           <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400">Are you sure you want to restore this permission: {{ $permission->name }}</h3>
           <div class="inline-flex">
-            <a href="{{ route('permission.restore', $permission->id) }}" class="text-white bg-fuchsia-600 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 dark:focus:ring-fuchsia-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+            <a href="{{ route('permission.restore', $permission->id) }}" class="text-white bg-fuchsia-600 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 dark:focus:ring-fuchsia-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
               Yes, I'm sure
             </a>    
-            <button data-modal-hide="popup-modal-restore{{ $permission->id }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+            <button data-modal-hide="popup-modal-restore{{ $permission->id }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
           </div>
         </div>
       </div>
@@ -159,10 +159,10 @@
           </svg>
           <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400">Are you sure you want to destroy this permission: {{ $permission->name }}</h3>
           <div class="inline-flex">
-            <a href="{{ route('permission.destroy-permanently', $permission->id) }}" class="text-white bg-rose-600 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:focus:ring-rose-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+            <a href="{{ route('permission.destroy-permanently', $permission->id) }}" class="text-white bg-rose-600 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:focus:ring-rose-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
               Yes, I'm sure
             </a>    
-            <button data-modal-hide="popup-modal-destroy{{ $permission->id }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+            <button data-modal-hide="popup-modal-destroy{{ $permission->id }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
           </div>
         </div>
       </div>
