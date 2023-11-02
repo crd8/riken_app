@@ -4,7 +4,7 @@
       <div class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
-            <a class="text-sky-700 dark:text-white bg-sky-200 hover:bg-sky-100 focus:ring-4 focus:ring-sky-100 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-900 dark:hover:bg-sky-800 focus:outline-none dark:focus:ring-sky-900" href="{{ route('user.index') }}">
+            <a class="text-sky-700 dark:text-white bg-sky-50 hover:bg-sky-100 focus:ring-4 focus:ring-sky-100 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-900 dark:hover:bg-sky-800 focus:outline-none dark:focus:ring-sky-900" href="{{ route('user.index') }}">
               {{ __('Back to All Users') }}
             </a>
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">

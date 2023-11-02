@@ -174,7 +174,7 @@ class PermissionController extends Controller
 
     public function destroyPermanently($id)
     {
-        $permission = permission::withTrashed()->find($id);
+        $permission = Permission::withTrashed()->find($id);
         $namepermission = $permission->name;
 
         if ($permission) {

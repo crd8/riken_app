@@ -3,7 +3,7 @@
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
       <span class="sr-only">Open main menu</span>
-      <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+      <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
       </svg>
     </button>
@@ -14,22 +14,22 @@
     </button>
     <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
       <span class="sr-only">Open user menu</span>
-      <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="">
+      <img class="w-8 h-8 rounded-full" src="https://source.unsplash.com/adult-brown-cat-Ah_QC2v2alE" alt="">
     </button>
     <!-- Dropdown menu -->
-    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+    <div class="z-50 hidden my-4 list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-900 dark:divide-gray-700" id="user-dropdown">
       <div class="px-4 py-3">
-        <span class="block text-sm text-gray-900 dark:text-white">{{ Auth::user()->name }}</span>
-        <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{ Auth::user()->email }}</span>
+        <span class="block text-gray-600 text-left dark:text-white">{{ Auth::user()->name }}</span>
+        <span class="block text-gray-400 text-left dark:text-gray-400">{{ Auth::user()->email }}</span>
       </div>
       <ul class="py-2" aria-labelledby="user-menu-button">
          <li>
-            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{{ __('Profile') }}</a>
+            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">{{ __('Profile') }}</a>
          </li>
          <li>
             <form method="POST" action="{{ route('logout') }}">
                @csrf
-               <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+               <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
             </form>
          </li>
       </ul>
@@ -47,10 +47,10 @@
     <span class="sr-only">Close menu</span>
   </button>
   <div class="py-4 overflow-y-auto">
-    <ul class="space-y-2 font-medium">
+    <ul class="space-y-2">
       <li>
-        <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'flex items-center p-2 text-white rounded-lg dark:text-white bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:hover:bg-sky-600 group pointer-events-none' : 'flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group' }} ">
-          <svg class="{{ request()->routeIs('dashboard') ? 'w-5 h-5 text-gray-50 transition duration-75 dark:text-gray-50 group-hover:text-gray-50 dark:group-hover:text-white' : 'w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+        <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'flex items-center p-2 text-white rounded-lg dark:text-white bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:hover:bg-sky-600 group pointer-events-none' : 'flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group' }} ">
+          <svg class="{{ request()->routeIs('dashboard') ? 'w-5 h-5 text-gray-50 transition duration-75 dark:text-gray-50 group-hover:text-gray-50 dark:group-hover:text-white' : 'w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-500 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
             <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"/>
             <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"/>
           </svg>
@@ -58,8 +58,8 @@
         </a>
       </li>
       <li>
-        <button type="button" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'role.index', 'role.create', 'role.edit', 'role.show', 'user.index', 'user.create', 'user.edit', 'user.show') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-administrator" data-collapse-toggle="dropdown-administrator">
-          <svg class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'role.index', 'role.create', 'role.edit', 'role.show', 'user.index', 'user.create', 'user.edit', 'user.show') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+        <button type="button" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'role.index', 'role.create', 'role.edit', 'role.show', 'user.index', 'user.create', 'user.edit', 'user.show') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-administrator" data-collapse-toggle="dropdown-administrator">
+          <svg class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'role.index', 'role.create', 'role.edit', 'role.show', 'user.index', 'user.create', 'user.edit', 'user.show') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
             <path d="m17.351 3.063-8-3a1.009 1.009 0 0 0-.7 0l-8 3A1 1 0 0 0 0 4a19.394 19.394 0 0 0 8.47 15.848 1 1 0 0 0 1.06 0A19.394 19.394 0 0 0 18 4a1 1 0 0 0-.649-.937Zm-3.644 4.644-5 5A1 1 0 0 1 8 13c-.033 0-.065 0-.1-.005a1 1 0 0 1-.733-.44l-2-3a1 1 0 0 1 1.664-1.11l1.323 1.986 4.138-4.138a1 1 0 0 1 1.414 1.414h.001Z"/>
           </svg>
           <span class="flex-1 ml-3 text-left whitespace-nowrap">Administrator</span>
@@ -69,25 +69,25 @@
         </button>
         <ul id="dropdown-administrator" class="hidden py-2 space-y-2">
           <li>
-            <a href="{{ route('permission.index') }}" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-11 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('permission.index') }}" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Permissions') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('role.index') }}" class="{{ request()->routeIs('role.index', 'role.create', 'role.edit', 'role.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-11 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('role.index') }}" class="{{ request()->routeIs('role.index', 'role.create', 'role.edit', 'role.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Roles') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('user.index') }}" class="{{ request()->routeIs('user.index', 'user.create', 'user.edit', 'user.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-11 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('user.index') }}" class="{{ request()->routeIs('user.index', 'user.create', 'user.edit', 'user.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Users') }}
             </a>
           </li>
         </ul>
       </li>
       <li>
-        <button type="button" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-plant-layout" data-collapse-toggle="dropdown-plant-layout">
-          <svg class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+        <button type="button" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-plant-layout" data-collapse-toggle="dropdown-plant-layout">
+          <svg class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
             <path d="M17 16h-1V2a1 1 0 1 0 0-2H2a1 1 0 0 0 0 2v14H1a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM5 4a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4Zm0 5V8a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1Zm6 7H7v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3Zm2-7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1Zm0-4a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1Z"/>
           </svg>
           <span class="flex-1 ml-3 text-left whitespace-nowrap">Business</span>
@@ -97,12 +97,12 @@
         </button>
         <ul id="dropdown-plant-layout" class="hidden py-2 space-y-2">
           <li>
-            <a href="{{ route('department.index') }}" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-11 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('department.index') }}" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Departments') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('area.index') }}" class="{{ request()->routeIs('area.index', 'area.create', 'area.edit', 'area.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-11 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('area.index') }}" class="{{ request()->routeIs('area.index', 'area.create', 'area.edit', 'area.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Areas') }}
             </a>
           </li>
@@ -123,7 +123,7 @@
             <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
           </svg>
           <span class="flex-1 ml-3 whitespace-nowrap">Kanban</span>
-          <span class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
+          <span class="inline-flex items-center justify-center px-2 ml-3 text-sm text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
         </a>
       </li> --}}
     </ul>

@@ -57,6 +57,11 @@ Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth']
     Route::get('permission/trash', [PermissionController::class, 'trash'])->name('permission.trash');
     Route::get('permission/restore/{id}', [PermissionController::class, 'restore'])->name('permission.restore');
     Route::get('permission/destroy-permanently/{id}', [PermissionController::class, 'destroyPermanently'])->name('permission.destroy-permanently');
+
+    // Role
+    Route::get('role/trash', [RoleController::class, 'trash'])->name('role.trash');
+    Route::get('role/restore/{id}', [RoleController::class, 'restore'])->name('role.restore');
+    Route::get('role/destroy-permanently/{id}', [RoleController::class, 'destroyPermanently'])->name('role.destroy-permanently');
 });
 
 require __DIR__.'/auth.php';
