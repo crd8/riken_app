@@ -69,17 +69,17 @@
         </button>
         <ul id="dropdown-administrator" class="hidden py-2 space-y-2">
           <li>
-            <a href="{{ route('permission.index') }}" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('permission.index') }}" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Permissions') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('role.index') }}" class="{{ request()->routeIs('role.index', 'role.create', 'role.edit', 'role.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('role.index') }}" class="{{ request()->routeIs('role.index', 'role.create', 'role.edit', 'role.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Roles') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('user.index') }}" class="{{ request()->routeIs('user.index', 'user.create', 'user.edit', 'user.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('user.index') }}" class="{{ request()->routeIs('user.index', 'user.create', 'user.edit', 'user.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Users') }}
             </a>
           </li>
@@ -97,12 +97,12 @@
         </button>
         <ul id="dropdown-plant-layout" class="hidden py-2 space-y-2">
           <li>
-            <a href="{{ route('department.index') }}" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('department.index') }}" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Departments') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('area.index') }}" class="{{ request()->routeIs('area.index', 'area.create', 'area.edit', 'area.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-9 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-9 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('area.index') }}" class="{{ request()->routeIs('area.index', 'area.create', 'area.edit', 'area.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Areas') }}
             </a>
           </li>

@@ -62,6 +62,11 @@ Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth']
     Route::get('role/trash', [RoleController::class, 'trash'])->name('role.trash');
     Route::get('role/restore/{id}', [RoleController::class, 'restore'])->name('role.restore');
     Route::get('role/destroy-permanently/{id}', [RoleController::class, 'destroyPermanently'])->name('role.destroy-permanently');
+
+    // User
+    Route::get('user/trash', [UserController::class, 'trash'])->name('user.trash');
+    Route::get('user/restore/{id}', [UserController::class, 'restore'])->name('user.restore');
+    Route::get('user/destroy-permanently/{id}', [UserController::class, 'destroyPermanently'])->name('user.destroy-permanently');
 });
 
 require __DIR__.'/auth.php';
