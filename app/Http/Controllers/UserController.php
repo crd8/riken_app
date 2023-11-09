@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function index()
     {
-            $users = (new User)->newQuery();
+        $users = (new User)->newQuery();
 
         if (request()->has('search')) {
             $searchTerm = '%' . request()->input('search') . '%';
@@ -67,40 +67,6 @@ class UserController extends Controller
         $startNumber = ($currentPage - 1) * $perPage + 1;
 
         return view('user.index', compact('users', 'sort', 'order', 'startNumber'));
-        
-        // $users = (new User)->newQuery();
-        // if (request()->has('search')) {
-        //     $searchTerm = '%' . request()->input('search') . '%';
-        //     $users->where(function($query) use ($searchTerm) {
-        //         $query->where('name', 'like', $searchTerm)
-        //               ->orWhere('email', 'like', $searchTerm)
-        //               ->orWhere('department_id', 'like', $searchTerm);
-        //     });
-        // }
-        // // if (request()->has('search')) {
-        // //     $users->where('name', 'Like', '%' . request()->input('search') . '%')->orWhere('email', 'Like', '%' . request()->input('search') . '%' );
-        // // }
-
-        // $sort = request()->query('sort', 'name');
-        // if (request()->query('sort')) {
-        //     $attribute = request()->query('sort');
-        //     $sort_order = 'ASC';
-        //     if (strncmp($attribute, '-', 1) === 0) {
-        //         $sort_order = 'DESC';
-        //         $attribute = substr($attribute, 1);
-        //     }
-        //     $users->orderBy($attribute, $sort_order);
-        // }
-
-        // $order = request()->query('order', 'latest');
-        // if ($order === 'oldest') {
-        //     $users->oldest('created_at');
-        // } else {
-        //     $users->latest('created_at');
-        // }
-
-        // $users = $users->paginate(10);
-        // return view('user.index', compact('users', 'sort', 'order'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -135,7 +101,7 @@ class UserController extends Controller
             $user->assignRole($request->roles);
         }
 
-        return redirect()->route('user.index')->with('message', 'User created successfully');
+        return redirect()->route('user.index')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong> created successfully");
     }
 
     /**
@@ -185,7 +151,7 @@ class UserController extends Controller
 
         $roles = $request->roles ?? [];
         $user->syncRoles($roles);
-        return redirect()->route('user.index')->with('message', 'User updated successfully');
+        return redirect()->route('user.index')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong> updated successfully");
     }
 
     /**
@@ -193,7 +159,57 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $nameUser = $user->name;
         $user->delete();
-        return redirect()->route('user.index')->with('message', 'User deleted successfully');
+        return redirect()->route('user.index')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameUser}</strong> successfully deleted to trash");
+    }
+
+    public function trash()
+    {
+        $users = (new User)->newQuery();
+        if (request()->has('search')) {
+            $searchTerm = '%' . request()->input('search') . '%';
+            $users->where(function($query) use ($searchTerm) {
+                $query->where('name', 'like', $searchTerm)->orWhere('email', 'like', $searchTerm)->orWhereHas('department', function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', $searchTerm);
+                });
+            });
+        }
+
+        $order = request()->query('order', 'latest');
+        if ($order === 'oldest') {
+            $users->oldest('deleted_at');
+        } else {
+            $users->latest('deleted_at');
+        }
+
+        $users = $users->onlyTrashed()->paginate(10);
+        $currentPage = $users->currentPage();
+        $perPage = $users->perPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
+
+        return view('user.trash', compact('users', 'order', 'startNumber'));
+    }
+
+    public function restore($id)
+    {
+        $user = User::withTrashed()->find($id);
+        $nameUser = $user->name;
+
+        if ($user) {
+            $user->restore();
+            return redirect()->route('user.index')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameUser}</strong> successfully restored");
+        }
+    }
+
+    public function destroyPermanently($id)
+    {
+        $user = User::withTrashed()->find($id);
+        $nameUser = $user->name;
+
+        if ($user) {
+            $user->forceDelete();
+            return redirect()->route('user.trash')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameUser}</strong> successfully deleted permanently");
+        }
     }
 }
