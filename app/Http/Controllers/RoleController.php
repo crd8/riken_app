@@ -85,7 +85,7 @@ class RoleController extends Controller
             $role->givePermissionTo($request->permissions);
         }
 
-        return redirect()->route('role.index')->with('message', "Role <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong> created successfully");
+        return redirect()->route('role.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: New data has been successfully created.");
     }
 
     /**
@@ -136,7 +136,7 @@ class RoleController extends Controller
         // sync permission yang dicheck dan di uncheck
         $role->syncPermissions($permissions);
 
-        return redirect()->route('role.index')->with('message', "Role <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$oldRoleName}</strong> successfully updated to <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong>");
+        return redirect()->route('role.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: data has been successfully updated.");
     }
 
     /**
@@ -146,7 +146,7 @@ class RoleController extends Controller
     {
         $nameRole = $role->name;
         $role->delete();
-        return redirect()->route('role.index')->with('message', "Role <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameRole}</strong> successfully deleted to trash");
+        return redirect()->route('role.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameRole}</span> has been archived: Open the archive to view or restore it.");
     }
 
     public function trash()
@@ -179,7 +179,7 @@ class RoleController extends Controller
 
         if ($role) {
             $role->restore();
-            return redirect()->route('role.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameRole}</strong> successfully restored");
+            return redirect()->route('role.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameRole}</span> has been restored, data is now active again in the system.");
         }
     }
 
@@ -190,7 +190,7 @@ class RoleController extends Controller
 
         if ($role) {
             $role->forceDelete();
-            return redirect()->route('role.trash')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameRole}</strong> successfully deleted permanently");
+            return redirect()->route('role.trash')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameRole}</span> has been permanently deleted.");
         }
     }
 }

@@ -80,7 +80,7 @@ class DepartmentController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('department.index')->with('message', "Department {$request->name} created successfully");
+        return redirect()->route('department.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: New data has been successfully created.");
     }
 
     /**
@@ -118,7 +118,7 @@ class DepartmentController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->route('department.index')->with('message', "Department {$oldDepartmentName} successfully updated to {$request->name}");
+        return redirect()->route('department.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: data has been successfully updated.");
     }
 
     /**
@@ -128,7 +128,7 @@ class DepartmentController extends Controller
     {
         $nameDepartment = $department->name;
         $department->delete();
-        return redirect()->route('department.index')->with('message', "Department {$nameDepartment} successfully deleted to trash");
+        return redirect()->route('department.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameDepartment}</span> has been archived: Open the archive to view or restore it.");
     }
 
     /**
@@ -165,7 +165,7 @@ class DepartmentController extends Controller
 
         if ($department) {
             $department->restore();
-            return redirect()->route('department.index')->with('message', "Department {$nameDepartment} successfully restored");
+            return redirect()->route('department.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameDepartment}</span> has been restored, data is now active again in the system.");
         }
     }
 
@@ -176,7 +176,7 @@ class DepartmentController extends Controller
 
         if ($department) {
             $department->forceDelete();
-            return redirect()->route('department.trash')->with('message', "Department {$nameDepartment} successfully delete permanently");
+            return redirect()->route('department.trash')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameDepartment}</span> has been permanently deleted.");
         }
 
     }

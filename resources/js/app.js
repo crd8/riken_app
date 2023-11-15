@@ -8,8 +8,9 @@ import 'flowbite';
 window.Alpine = Alpine;
 
 Alpine.start();
-
-// On page load or when changing themes, best to add inline in `head` to avoid FOUC
+/**
+ * switch tema dark dan light
+*/
 if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark');
 } else {
@@ -19,7 +20,6 @@ if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localS
 var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-// Change the icons inside the button based on previous settings
 if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     themeToggleLightIcon.classList.remove('hidden');
 } else {
@@ -57,3 +57,54 @@ themeToggleBtn.addEventListener('click', function() {
     
 });
 
+/**
+ * validate input email pattern
+*/
+document.addEventListener('alpine:init', () => {
+    Alpine.directive('input', (el, { expression, modifiers }, { evaluateLater, cleanup }) => {
+        const evaluate = evaluateLater(expression);
+        
+        const inputHandler = () => {
+            evaluate();
+            // Validasi format email jika modifier 'email' digunakan
+            if (modifiers.includes('email')) {
+                validateEmail(el);
+            }
+        };
+
+        el.addEventListener('input', inputHandler);
+
+        cleanup(() => {
+            el.removeEventListener('input', inputHandler);
+        });
+    });
+
+    // Fungsi untuk validasi format email
+    const validateEmail = (el) => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const isValid = emailPattern.test(el.value);
+
+        if (!isValid) {
+            el.setCustomValidity('Invalid email format');
+        } else {
+            el.setCustomValidity('');
+        }
+    };
+});
+
+
+// document.addEventListener('alpine:init', () => {
+//     Alpine.directive('input', (el, { expression }, { evaluateLater, cleanup }) => {
+//         const evaluate = evaluateLater(expression);
+        
+//         const inputHandler = () => {
+//             evaluate();
+//         };
+
+//         el.addEventListener('input', inputHandler);
+
+//         cleanup(() => {
+//             el.removeEventListener('input', inputHandler);
+//         });
+//     });
+// });
