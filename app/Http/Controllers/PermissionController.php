@@ -86,7 +86,7 @@ class PermissionController extends Controller
             'guard_name' => 'web'
         ]);
         // redirect ke page index dan memberika notifikasi sukses
-        return redirect()->route('permission.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong> created successfully");
+        return redirect()->route('permission.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: New data has been successfully created.");
     }
 
     /**
@@ -125,7 +125,7 @@ class PermissionController extends Controller
             'guard_name' => 'web'
         ]);
 
-        return redirect()->route('permission.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$oldPermissionName}</strong> successfully updated to <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong>");
+        return redirect()->route('permission.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: data has been successfully updated.");
     }
 
     /**
@@ -135,7 +135,7 @@ class PermissionController extends Controller
     {
         $namePermission = $permission->name;
         $permission->delete();
-        return redirect()->route('permission.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$namePermission}</strong> successfully deleted to trash");
+        return redirect()->route('permission.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$namePermission}</span> has been archived: Open the archive to view or restore it.");
     }
 
     public function trash()
@@ -168,7 +168,7 @@ class PermissionController extends Controller
 
         if($permission) {
             $permission->restore();
-            return redirect()->route('permission.index')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$namePermission}</strong> successfully restored");
+            return redirect()->route('permission.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$namePermission}</span> has been restored, data is now active again in the system.");
         }
     }
 
@@ -179,7 +179,7 @@ class PermissionController extends Controller
 
         if ($permission) {
             $permission->forceDelete();
-            return redirect()->route('permission.trash')->with('message', "Permission <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$namepermission}</strong> successfully deleted permanently");
+            return redirect()->route('permission.trash')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$namepermission}</span> has been permanently deleted.");
         }
     }
 }

@@ -101,7 +101,7 @@ class UserController extends Controller
             $user->assignRole($request->roles);
         }
 
-        return redirect()->route('user.index')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong> created successfully");
+        return redirect()->route('user.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: New data has been successfully created.");
     }
 
     /**
@@ -135,7 +135,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
             'password' => ['nullable', 'confirmed', Password::defaults()],
-            'department' => ['required']
+            // 'department' => ['required']
         ]);
 
         $user->update([
@@ -151,7 +151,7 @@ class UserController extends Controller
 
         $roles = $request->roles ?? [];
         $user->syncRoles($roles);
-        return redirect()->route('user.index')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$request->name}</strong> updated successfully");
+        return redirect()->route('user.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: data has been successfully updated.");
     }
 
     /**
@@ -161,7 +161,7 @@ class UserController extends Controller
     {
         $nameUser = $user->name;
         $user->delete();
-        return redirect()->route('user.index')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameUser}</strong> successfully deleted to trash");
+        return redirect()->route('user.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameUser}</span> has been archived: Open the archive to view or restore it.");
     }
 
     public function trash()
@@ -198,7 +198,7 @@ class UserController extends Controller
 
         if ($user) {
             $user->restore();
-            return redirect()->route('user.index')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameUser}</strong> successfully restored");
+            return redirect()->route('user.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameUser}</span> has been restored, data is now active again in the system.");
         }
     }
 
@@ -209,7 +209,7 @@ class UserController extends Controller
 
         if ($user) {
             $user->forceDelete();
-            return redirect()->route('user.trash')->with('message', "User <strong class='font-semibold text-sky-700 dark:text-sky-500'>{$nameUser}</strong> successfully deleted permanently");
+            return redirect()->route('user.trash')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameUser}</span> has been permanently deleted.");
         }
     }
 }

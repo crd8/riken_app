@@ -132,12 +132,12 @@
           <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
           </svg>
-          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400">Are you sure you want to restore this permission: {{ $permission->name }}</h3>
+          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will restore archived data. Are you sure you want to restore the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $permission->name }}</span>"?</h3>
           <div class="inline-flex">
-            <a href="{{ route('permission.restore', $permission->id) }}" class="text-white bg-fuchsia-600 hover:bg-fuchsia-800 focus:ring-4 focus:outline-none focus:ring-fuchsia-300 dark:focus:ring-fuchsia-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+            <a href="{{ route('permission.restore', $permission->id) }}" class="text-gray-700 dark:text-gray-300 hover:bg-green-700 dark:hover:bg-green-800 hover:text-white dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-green-500 dark:focus:ring-green-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 mb-2">
               Yes, I'm sure
             </a>    
-            <button data-modal-hide="popup-modal-restore{{ $permission->id }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+            <button data-modal-hide="popup-modal-restore{{ $permission->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
           </div>
         </div>
       </div>
@@ -157,12 +157,16 @@
           <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
           </svg>
-          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400">Are you sure you want to destroy this permission: {{ $permission->name }}</h3>
+          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will permanently delete the data. Are you sure you want to delete the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $permission->name }}</span>"?</h3>
           <div class="inline-flex">
-            <a href="{{ route('permission.destroy-permanently', $permission->id) }}" class="text-white bg-rose-600 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 dark:focus:ring-rose-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-              Yes, I'm sure
-            </a>    
-            <button data-modal-hide="popup-modal-destroy{{ $permission->id }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+            <form method="POST" action="{{ route('permission.destroy-permanently', $permission->id) }}">
+              @csrf
+              @method('DELETE')
+              <button class="text-gray-700 dark:text-gray-300 hover:bg-red-700 dark:hover:bg-red-800 hover:text-white dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-red-500 dark:focus:ring-red-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                Yes, I'm sure
+              </button>
+            </form> 
+            <button data-modal-hide="popup-modal-destroy{{ $permission->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
           </div>
         </div>
       </div>

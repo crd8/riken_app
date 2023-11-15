@@ -6,6 +6,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\AreaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,22 +52,25 @@ Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth']
     // Department
     Route::get('department/trash', [DepartmentController::class, 'trash'])->name('department.trash');
     Route::get('department/restore/{id}', [DepartmentController::class, 'restore'])->name('department.restore');
-    Route::get('department/destroy-permanently/{id}', [DepartmentController::class, 'destroyPermanently'])->name('department.destroy-permanently');
+    Route::delete('department/destroy-permanently/{id}', [DepartmentController::class, 'destroyPermanently'])->name('department.destroy-permanently');
 
     // Permission
     Route::get('permission/trash', [PermissionController::class, 'trash'])->name('permission.trash');
     Route::get('permission/restore/{id}', [PermissionController::class, 'restore'])->name('permission.restore');
-    Route::get('permission/destroy-permanently/{id}', [PermissionController::class, 'destroyPermanently'])->name('permission.destroy-permanently');
+    Route::delete('permission/destroy-permanently/{id}', [PermissionController::class, 'destroyPermanently'])->name('permission.destroy-permanently');
 
     // Role
     Route::get('role/trash', [RoleController::class, 'trash'])->name('role.trash');
     Route::get('role/restore/{id}', [RoleController::class, 'restore'])->name('role.restore');
-    Route::get('role/destroy-permanently/{id}', [RoleController::class, 'destroyPermanently'])->name('role.destroy-permanently');
+    Route::delete('role/destroy-permanently/{id}', [RoleController::class, 'destroyPermanently'])->name('role.destroy-permanently');
 
     // User
     Route::get('user/trash', [UserController::class, 'trash'])->name('user.trash');
     Route::get('user/restore/{id}', [UserController::class, 'restore'])->name('user.restore');
-    Route::get('user/destroy-permanently/{id}', [UserController::class, 'destroyPermanently'])->name('user.destroy-permanently');
+    Route::delete('user/destroy-permanently/{id}', [UserController::class, 'destroyPermanently'])->name('user.destroy-permanently');
+
+    // Area
+    Route::get('area/trash', [AreaController::class, 'trash'])->name('area.trash');
 });
 
 require __DIR__.'/auth.php';
