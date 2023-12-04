@@ -76,7 +76,7 @@
                 </thead>
                 <tbody>
                   @foreach ($roles as $role)
-                  <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/70 dark:hover:bg-gray-800/60">
                     <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $startNumber++ }}
                     </td>
@@ -88,12 +88,12 @@
                     </td>
                     <td class="flex items-center px-6 py-4 space-x-3">
                       @canany(['role create'])
-                      <button class="hover:underline" data-modal-toggle="popup-modal-restore{{ $role->id }}" data-modal-target="popup-modal-restore{{ $role->id }}">
+                      <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-restore{{ $role->id }}" data-modal-target="popup-modal-restore{{ $role->id }}">
                         {{ __('Restore') }}
                       </button>
                       @endcanany
                       @canany(['role delete'])
-                      <button class="hover:underline" data-modal-toggle="popup-modal-destroy{{ $role->id }}" data-modal-target="popup-modal-destroy{{ $role->id }}">
+                      <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-destroy{{ $role->id }}" data-modal-target="popup-modal-destroy{{ $role->id }}">
                         {{ __('Destroy') }}
                       </button>
                       @endcanany

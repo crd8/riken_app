@@ -1,39 +1,40 @@
 <x-app-layout>
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="bg-gray-200 dark:bg-gray-800 overflow-hidden rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
-            @can('permission create')
-            <a class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-600 dark:hover:bg-sky-700 focus:outline-none dark:focus:ring-sky-800" href="{{ route('permission.create') }}">
-              {{ __('Add a New Permission') }}
-            </a>
-            <a class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800" href="{{ route('permission.trash') }}">
-              {{ __('Archived Data') }}
-            </a>
-            @endcan
-            <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-            <div class="flex justify-between">
+            <header class="max-w-xl">
+              <h2 class="text-gray-800 text-lg font-semibold dark:text-gray-200">
+                {{ __('List of Permissions') }}
+              </h2>
+              <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">
+                {{ __('This list lists all the permissions available in the system.') }}
+              </p>
+            </header>
+            {{-- <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"> --}}
+            <div class="flex justify-between items-center mt-7">
               <div>
-                <header class="max-w-xl">
-                  <h2 class="text-gray-600 dark:text-gray-200">
-                    {{ __('List of Permissions') }}
-                  </h2>
-                  <p class="mt-1 text-sm text-gray-400 dark:text-gray-400">
-                    {{ __('This list lists all the permissions available in the system.') }}
-                  </p>
-                </header>
+                @can('permission create')
+                <a class="border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75" href="{{ route('permission.create') }}">
+                  {{ __('Add a New Permission') }}
+                </a>
+                <a class="border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75" href="{{ route('permission.trash') }}">
+                  {{ __('Archived Data') }}
+                </a>
+                @endcan
+                
               </div>
               <form class="w-4/12" action="{{ route('permission.index') }}" method="GET">   
                 <label for="default-search" class="mb-2 text-sm text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <svg class="w-5 h-5 text-sky-700 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-                    <input name="search" type="search" value="{{ request()->input('search') }}" autofocus autocomplete="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" placeholder="Search...">
-                    <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-lg text-sm px-4 py-2 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">Search</button>
+                    <input name="search" type="search" value="{{ request()->input('search') }}" autofocus autocomplete="search" id="default-search" class="block w-full px-5 py-2.5 pl-10 text-sm text-gray-900 border border-gray-500/40 rounded bg-gray-50 focus:ring-gray-700 focus:border-gray-700 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 placeholder:italic dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400" placeholder="Search data...">
+                    <button type="submit" class="text-gray-700 dark:text-gray-200 hover:text-sky-50 font-semibold bg-gray-200 hover:bg-sky-600 absolute right-2.5 bottom-2 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded text-sm px-2.5 py-1 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">Search</button>
                 </div>
               </form>
             </div>
@@ -57,28 +58,28 @@
               </div>
               @endif
             </div>
-            <div class="relative overflow-x-auto sm:rounded-lg mt-8">
-              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+            <div class="relative overflow-x-auto rounded mt-5">
+              <table class="border border-gray-500/30 dark:border-gray-600 w-full text-sm text-left bg-gray-100 text-gray-700 dark:text-gray-400">
+                <thead class="text-sm border-b border-gray-500/30 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
                       {{ __('#') }}
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
                       <a href="{{ route('permission.index', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $permissions->currentPage()]) }}">
-                        {{ __('Permission Name') }} {!! ($sort === 'name' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
+                        {{ __('Permission Name') }} {!! ($sort === 'name' ? '<span class="text-sky-600 ml-1">&#9650;</span>' : '<span class="text-sky-600 ml-1">&#9660;</span>') !!}
                       </a>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
                       <a href="{{ route('permission.index', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $permissions->currentPage()]) }}">
-                        {{ __('Created at') }} {!! ($order === 'oldest' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
+                        {{ __('Created at') }} {!! ($order === 'oldest' ? '<span class="text-sky-600 ml-1">&#9650;</span>' : '<span class="text-sky-600 ml-1">&#9660;</span>') !!}
                       </a>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
                       {{ __('Modified at') }}
                     </th>
                     @canany(['permission edit', 'permission delete'])
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
                       {{ __('Action') }}
                     </th>
                     @endcanany
@@ -86,38 +87,47 @@
                 </thead>
                 <tbody>
                   @foreach ($permissions as $permission)
-                  <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                  <tr class="border-b border-gray-500/30 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/70 dark:hover:bg-gray-800/60">
+                    <td scope="row" class="px-6 py-3 whitespace-nowrap">
                       {{ $startNumber++ }}
                     </td>
-                    <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                    <td scope="row" class="px-6 py-3 whitespace-nowrap">
                       {{ $permission->name }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-3 whitespace-nowrap">
                       {{ Carbon\Carbon::parse($permission->created_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-3 whitespace-nowrap">
                       {{ Carbon\Carbon::parse($permission->updated_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    <td class="flex items-center px-6 py-4 space-x-3">
+                    <td class="flex items-center px-6 py-3 whitespace-nowrap space-x-3">
                       @canany(['permission edit', 'permission delete'])
-                      <a href="{{ route('permission.edit', $permission->id) }}" class="hover:underline">
+                      <a href="{{ route('permission.edit', $permission->id) }}" class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
                         {{ __('Edit') }}
                       </a>
-                      <button class="hover:underline" data-modal-toggle="popup-modal{{ $permission->id }}" data-modal-target="popup-modal{{ $permission->id }}">
+                      <button class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal{{ $permission->id }}" data-modal-target="popup-modal{{ $permission->id }}">
                         {{ __('Delete') }}
                       </button>
                       @endcanany
                     </td>
+                    {{-- <td class="flex items-center px-6 py-3 whitespace-nowrap space-x-3">
+                      @canany(['permission edit', 'permission delete'])
+                      <a href="{{ route('permission.edit', $permission->id) }}" class="uppercase text-sky-700 font-semibold hover:underline decoration-2 underline-offset-2">
+                        {{ __('Edit') }}
+                      </a>
+                      <button class="uppercase text-sky-700 font-semibold hover:underline decoration-2 underline-offset-2" data-modal-toggle="popup-modal{{ $permission->id }}" data-modal-target="popup-modal{{ $permission->id }}">
+                        {{ __('Delete') }}
+                      </button>
+                      @endcanany
+                    </td> --}}
                   </tr>
                   @endforeach
                 </tbody>
-              </table>
-              
-              <div class="mt-4">
-                {{ $permissions->links('.layouts.paginationcustom') }}
-              </div>
-            </div>            
+              </table>              
+            </div>
+            <div class="mt-4">
+              {{ $permissions->links('.layouts.paginationcustom') }}
+            </div>        
           </section>
         </div>
       </div>

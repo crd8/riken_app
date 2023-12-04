@@ -4,27 +4,27 @@
       <div class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
-            @can('role create')
-            <a class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-600 dark:hover:bg-sky-700 focus:outline-none dark:focus:ring-sky-800" href="{{ route('role.create') }}">
-              {{ __('Add a New Role') }}
+            @can('location create')
+            <a class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-600 dark:hover:bg-sky-700 focus:outline-none dark:focus:ring-sky-800" href="{{ route('location.create') }}">
+              {{ __('Add a New Location') }}
             </a>
-            <a class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800" href="{{ route('role.trash') }}">
+            {{-- <a class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800" href="{{ route('location.trash') }}">
               {{ __('Archived Data') }}
-            </a>
+            </a> --}}
             @endcan
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
             <div class="flex justify-between">
               <div>
                 <header class="max-w-xl">
                   <h2 class="text-gray-600 dark:text-gray-200">
-                    {{ __('List of Roles') }}
+                    {{ __('List of Locations') }}
                   </h2>
-                  <p class="mt-1 text-sm text-gray-400 dark:text-gray-400">
-                    {{ __('This list all the roles available in the system.') }}
+                  <p class="mt-1 text-gray-400 dark:text-gray-400">
+                    {{ __('This list all the location available in the system.') }}
                   </p>
                 </header>
               </div>
-              <form class="w-4/12" action="{{ route('role.index') }}" method="GET">   
+              <form class="w-4/12" action="{{ route('location.index') }}" method="GET">   
                 <label for="default-search" class="mb-2 text-sm text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -59,55 +59,71 @@
             </div>
             <div class="relative overflow-x-auto sm:rounded-lg mt-8">
               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
-                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                    <th scope="col" class="px-6 py-3">
                       {{ __('#') }}
                     </th>
-                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                      <a href="{{ route('role.index', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $roles->currentPage()])}}">
-                        {{ __('Role Name') }} {!! ($sort === 'name' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
+                    <th scope="col" class="px-6 py-3">
+                      {{ __('Code') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      <a href="{{ route('location.index', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $locations->currentPage()]) }}">
+                        {{ __('Name') }} {!! ($sort === 'name' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
                       </a>
                     </th>
-                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                      <a href="{{ route('role.index', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $roles->currentPage()]) }}">
+                    <th scope="col" class="px-6 py-3">
+                      {{ __('Area') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      <a href="{{ route('location.index', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $locations->currentPage()]) }}">
                         {{ __('Created at') }} {!! ($order === 'oldest' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
                       </a>
                     </th>
-                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                    <th scope="col" class="px-6 py-3">
                       {{ __('Modified at') }}
                     </th>
-                    @canany(['role edit', 'role delete'])
-                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                    @canany(['location edit', 'location delete'])
+                    <th scope="col" class="px-6 py-3">
                       {{ __('Action') }}
                     </th>
                     @endcanany
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($roles as $role)
+                  @foreach ($locations as $location)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/70 dark:hover:bg-gray-800/60">
-                    <td scope="row" class="px-6 py-4 whitespace-nowrap">
+                    <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $startNumber++ }}
                     </td>
-                    <td scope="row" class="px-6 py-4 whitespace-nowrap">
-                      {{ $role->name }}
+                    <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ $location->code }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ Carbon\Carbon::parse($role->created_at)->format('l, d F Y, H:i A') }}
+                    <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ $location->name }}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      {{ Carbon\Carbon::parse($role->updated_at)->format('l, d F Y, H:i A') }}
+                    <td class="px-6 py-4">
+                      @if ($location->area)
+                          {{ $location->area->name }}
+                      @else
+                          lokasi ini belum memilikki area nya
+                      @endif
                     </td>
-                    <td class="flex items-center px-6 py-4 whitespace-nowrap space-x-3">
-                      <a href="{{ route('role.show', $role->id) }}" class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
+                    <td class="px-6 py-4">
+                      {{ Carbon\Carbon::parse($location->created_at)->format('l, d F Y, H:i A') }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ Carbon\Carbon::parse($location->updated_at)->format('l, d F Y, H:i A') }}
+                    </td>
+                    <td class="flex items-center px-6 py-4 space-x-3">
+                      <a href="{{ route('location.show', $location->id) }}" class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
                         {{ __('Show') }}
                       </a>
-                      @canany(['role edit', 'role delete'])
-                        <a href="{{ route('role.edit', $role->id) }}" class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
+                      @canany(['location edit', 'location delete'])
+                        <a href="{{ route('location.edit', $location->id) }}" class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
                           {{ __('Edit') }}
                         </a>
-                        <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal{{ $role->id }}" data-modal-target="popup-modal{{ $role->id }}">
+                        <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal{{ $location->id }}" data-modal-target="popup-modal{{ $location->id }}">
                           {{ __('Delete') }}
                         </button>
                       @endcanany
@@ -117,7 +133,7 @@
                 </tbody>
               </table>
               <div class="mt-4">
-                {{ $roles->links('.layouts.paginationcustom') }}
+                {{ $locations->links('.layouts.paginationcustom') }}
               </div>
             </div>            
           </section>
@@ -126,11 +142,11 @@
     </div>
   </div>
   {{-- Modal --}}
-  @foreach ($roles as $role)
-  <div id="popup-modal{{ $role->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  @foreach ($locations as $location)
+  <div id="popup-modal{{ $location->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-md max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{ $role->id }}">
+        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{ $location->id }}">
           <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
           </svg>
@@ -140,16 +156,16 @@
           <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
           </svg>
-          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will archive the data. Are you sure you want to archive the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $role->name }}</span>"?</h3>
+          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will archive the data. Are you sure you want to archive the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $location->name }}</span>"?</h3>
           <div class="inline-flex">
-            <form method="POST" action="{{ route('role.destroy', $role->id) }}">
+            <form method="POST" action="{{ route('location.destroy', $location->id) }}">
               @csrf
               @method('DELETE')
               <button class="text-gray-600 dark:text-gray-300 hover:bg-red-700 dark:hover:bg-red-800 hover:text-white dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-red-500 dark:focus:ring-red-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                 Yes, I'm sure
               </button>
             </form>     
-            <button data-modal-hide="popup-modal{{ $role->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
+            <button data-modal-hide="popup-modal{{ $location->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
           </div>
         </div>
       </div>

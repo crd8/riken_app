@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,6 +49,10 @@ Route::prefix('business')->namespace('App\Http\Controllers')->middleware(['auth'
     Route::resource('area', AreaController::class);
 });
 
+Route::prefix('mapping')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
+    Route::resource('location', LocationController::class);
+});
+
 Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
     // Department
     Route::get('department/trash', [DepartmentController::class, 'trash'])->name('department.trash');
@@ -71,6 +76,8 @@ Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth']
 
     // Area
     Route::get('area/trash', [AreaController::class, 'trash'])->name('area.trash');
+    Route::get('area/restore/{id}', [AreaController::class, 'restore'])->name('area.restore');
+    Route::delete('area/destroy-permanently/{id}', [AreaController::class, 'destroyPermanently'])->name('area.destroy-permanently');
 });
 
 require __DIR__.'/auth.php';

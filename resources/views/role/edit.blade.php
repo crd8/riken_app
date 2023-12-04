@@ -25,17 +25,38 @@
                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
               </div>
               @unless ($role->name == env('APP_SUPER_ADMIN', 'super-admin'))
+              <hr class="h-px my-7 bg-gray-200 border-0 dark:bg-gray-700">
               <div class="grid grid-cols-5 gap-4 text-sm">
-                {{-- Department Permissions --}}
+                {{-- Area --}}
                 <div class="mt-6">
-                  <h3 class="text-base mb-2 text-gray-600">Department Permissions</h3>
+                  <h3 class="text-base mb-2 text-gray-600 dark:text-gray-200">Area Permissions</h3>
+                  <div class="grid grid-cols-1 gap-2">
+                    @forelse ($permissions as $permission)
+                      @if (str_contains($permission->name, 'area'))
+                        <div class="flex bg-gray-100 dark:bg-gray-600 p-2 rounded items-center">
+                          <label>
+                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-400 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-900 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Area"> 
+                            <span class="text-sm capitalize text-gray-600 dark:text-gray-200">
+                              {{ $permission->name }}
+                            </span>
+                          </label>
+                        </div>
+                      @endif
+                    @empty
+                    ----
+                    @endforelse
+                  </div>
+                </div>
+                {{-- Department --}}
+                <div class="mt-6">
+                  <h3 class="text-base mb-2 text-gray-600 dark:text-gray-200">Department Permissions</h3>
                   <div class="grid grid-cols-1 gap-2">
                     @forelse ($permissions as $permission)
                       @if (str_contains($permission->name, 'department'))
-                        <div class="flex bg-gray-100 p-2 rounded items-center">
+                        <div class="flex bg-gray-100 dark:bg-gray-600 p-2 rounded items-center">
                           <label>
-                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Department"> 
-                            <span class="text-sm capitalize text-gray-600">
+                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-400 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-900 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Department"> 
+                            <span class="text-sm capitalize text-gray-600 dark:text-gray-200">
                               {{ $permission->name }}
                             </span>
                           </label>
@@ -46,16 +67,36 @@
                     @endforelse
                   </div>
                 </div>
-                {{-- Permission Permissions --}}
+                {{-- Location --}}
                 <div class="mt-6">
-                  <h3 class="text-base mb-2 text-gray-600">Permission Permissions</h3>
+                  <h3 class="text-base mb-2 text-gray-600 dark:text-gray-200">Location Permissions</h3>
+                  <div class="grid grid-cols-1 gap-2">
+                    @forelse ($permissions as $permission)
+                      @if (str_contains($permission->name, 'location'))
+                        <div class="flex bg-gray-100 dark:bg-gray-600 p-2 rounded items-center">
+                          <label>
+                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-400 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-900 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Location"> 
+                            <span class="text-sm capitalize text-gray-600 dark:text-gray-200">
+                              {{ $permission->name }}
+                            </span>
+                          </label>
+                        </div>
+                      @endif
+                    @empty
+                    ----
+                    @endforelse
+                  </div>
+                </div>
+                {{-- Permission --}}
+                <div class="mt-6">
+                  <h3 class="text-base mb-2 text-gray-600 dark:text-gray-200">Permission Permissions</h3>
                   <div class="grid grid-cols-1 gap-2">
                     @forelse ($permissions as $permission)
                       @if (str_contains($permission->name, 'permission'))
-                        <div class="flex bg-gray-100 p-2 rounded items-center">
+                        <div class="flex bg-gray-100 dark:bg-gray-600 p-2 rounded items-center">
                           <label>
-                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Pengguna"> 
-                            <span class="text-sm capitalize text-gray-600">
+                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-400 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-900 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Pengguna"> 
+                            <span class="text-sm capitalize text-gray-600 dark:text-gray-200">
                               {{ $permission->name }}
                             </span>
                           </label>
@@ -66,16 +107,16 @@
                     @endforelse
                   </div>
                 </div>
-                {{-- Role Permissions --}}
+                {{-- Role --}}
                 <div class="mt-6">
-                  <h3 class="text-base mb-2 text-gray-600">Role Permissions</h3>
+                  <h3 class="text-base mb-2 text-gray-600 dark:text-gray-200">Role Permissions</h3>
                   <div class="grid grid-cols-1 gap-2">
                     @forelse ($permissions as $permission)
                       @if (str_contains($permission->name, 'role'))
-                        <div class="flex bg-gray-100 p-2 rounded items-center">
+                        <div class="flex bg-gray-100 dark:bg-gray-600 p-2 rounded items-center">
                           <label>
-                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Peran"> 
-                            <span class="text-sm capitalize text-gray-600">
+                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-400 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-900 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Peran"> 
+                            <span class="text-sm capitalize text-gray-600 dark:text-gray-200">
                               {{ $permission->name }}
                             </span>
                           </label>
@@ -86,16 +127,16 @@
                     @endforelse
                   </div>
                 </div>
-                {{-- User Permissions --}}
+                {{-- User --}}
                 <div class="mt-6">
-                  <h3 class="text-base mb-2 text-gray-600">User Permissions</h3>
+                  <h3 class="text-base mb-2 text-gray-600 dark:text-gray-200">User Permissions</h3>
                   <div class="grid grid-cols-1 gap-2">
                     @forelse ($permissions as $permission)
                       @if (str_contains($permission->name, 'user'))
-                        <div class="flex bg-gray-100 p-2 rounded items-center">
+                        <div class="flex bg-gray-100 dark:bg-gray-600 p-2 rounded items-center">
                           <label>
-                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Pengguna"> 
-                            <span class="text-sm capitalize text-gray-600">
+                            <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-400 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-900 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Pengguna"> 
+                            <span class="text-sm capitalize text-gray-600 dark:text-gray-200">
                               {{ $permission->name }}
                             </span>
                           </label>

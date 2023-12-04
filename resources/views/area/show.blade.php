@@ -9,10 +9,10 @@
             </a>
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
             <header class="max-w-xl mb-8">
-              <h2 class="text-lg font-medium text-gray-900 dark:text-gray-200">
+              <h2 class="text-gray-600 dark:text-gray-200">
                 {{ __('View Area') }}
               </h2>
-              <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              <p class="mt-1 text-gray-400 dark:text-gray-400">
                 {{ __('These are area informations.') }}
               </p>
             </header>
@@ -32,12 +32,12 @@
               </thead>
               <tbody>
                 <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                  <th scope="row" class="px-6 py-4 font-medium dark:text-white">
+                  <td scope="row" class="px-6 py-4 dark:text-white">
                     {{ $area->code }}
-                  </th>
-                  <th scope="row" class="px-6 py-4 font-medium dark:text-white">
+                  </td>
+                  <td scope="row" class="px-6 py-4 dark:text-white">
                     {{ $area->name }}
-                  </th>
+                  </td>
                   <td class="px-6 py-4">
                     {{ $area->address }}
                   </td>

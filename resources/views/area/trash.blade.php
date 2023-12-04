@@ -4,27 +4,22 @@
       <div class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
-            @can('user create')
-            <a class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-600 dark:hover:bg-sky-700 focus:outline-none dark:focus:ring-sky-800" href="{{ route('user.create') }}">
-              {{ __('Add a New User') }}
+            <a class="text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-700" href="{{ route('area.index') }}">
+              {{ __('Back to All Active Areas') }}
             </a>
-            <a class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800" href="{{ route('user.trash') }}">
-              {{ __('Archived Data') }}
-            </a>
-            @endcan
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
             <div class="flex justify-between">
               <div>
                 <header class="max-w-xl">
                   <h2 class="text-gray-600 dark:text-gray-200">
-                    {{ __('List of Users') }}
+                    {{ __('List of deleted Area') }}
                   </h2>
-                  <p class="mt-1 text-gray-400 dark:text-gray-400">
-                    {{ __('This list all the users available in the system.') }}
+                  <p class="mt-1 text-sm text-gray-400 dark:text-gray-400">
+                    {{ __('This list lists all the area are deleted in the system.') }}
                   </p>
                 </header>
               </div>
-              <form class="w-4/12" action="{{ route('user.index') }}" method="GET">   
+              <form class="w-4/12" action="{{ route('area.trash') }}" method="GET">   
                 <label for="default-search" class="mb-2 text-sm text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -65,25 +60,23 @@
                       {{ __('#') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      <a href="{{ route('user.index', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $users->currentPage()]) }}">
-                        {{ __('Name') }} {!! ($sort === 'name' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
+                      {{ __('Code') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        {{ __('Name') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      {{ __('Address') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        {{ __('Created at') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      <a href="{{ route('area.trash', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $areas->currentPage()]) }}">
+                        {{ __('Deleted at') }} {!! ($order === 'oldest' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
                       </a>
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                      {{ __('Email') }}
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                      {{ __('Department') }}
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                      <a href="{{ route('user.index', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $users->currentPage()]) }}">
-                        {{ __('Created at') }} {!! ($order === 'oldest' ? '<span class="text-gray-400 ml-1">&#9650;</span>' : '<span class="text-gray-400 ml-1">&#9660;</span>') !!}
-                      </a>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                      {{ __('Modified at') }}
-                    </th>
-                    @canany(['user edit', 'user delete'])
+                    @canany(['area create'])
                     <th scope="col" class="px-6 py-3">
                       {{ __('Action') }}
                     </th>
@@ -91,41 +84,36 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($users as $user)
+                  @foreach ($areas as $area)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/70 dark:hover:bg-gray-800/60">
-                    <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                    <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $startNumber++ }}
                     </td>
-                    <td scope="row" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                      {{ $user->name }}
+                    <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ $area->code }}
                     </td>
                     <td class="px-6 py-4">
-                      {{ $user->email }}
+                      {{ $area->name }}
                     </td>
                     <td class="px-6 py-4">
-                      @if ($user->department)
-                          {{ $user->department->name }}
-                      @else
-                          Belum memiliki departemen
-                      @endif
+                      {{ $area->address }}
                     </td>
                     <td class="px-6 py-4">
-                      {{ Carbon\Carbon::parse($user->created_at)->format('l, d F Y, H:i A') }}
+                      {{ Carbon\Carbon::parse($area->created_at)->format('l, d F Y, H:i A') }}
                     </td>
                     <td class="px-6 py-4">
-                      {{ Carbon\Carbon::parse($user->updated_at)->format('l, d F Y, H:i A') }}
+                      {{ Carbon\Carbon::parse($area->deleted_at)->format('l, d F Y, H:i A') }}
                     </td>
                     <td class="flex items-center px-6 py-4 space-x-3">
-                      <a href="{{ route('user.show', $user->id) }}" class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
-                        {{ __('Show') }}
-                      </a>
-                      @canany(['user edit', 'user delete'])
-                        <a href="{{ route('user.edit', $user->id) }}" class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
-                          {{ __('Edit') }}
-                        </a>
-                        <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal{{ $user->id }}" data-modal-target="popup-modal{{ $user->id }}">
-                          {{ __('Delete') }}
-                        </button>
+                      @canany(['area create'])
+                      <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-restore{{ $area->id }}" data-modal-target="popup-modal-restore{{ $area->id }}">
+                        {{ __('Restore') }}
+                      </button>
+                      @endcanany
+                      @canany(['area delete'])
+                      <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-destroy{{ $area->id }}" data-modal-target="popup-modal-destroy{{ $area->id }}">
+                        {{ __('Destroy') }}
+                      </button>
                       @endcanany
                     </td>
                   </tr>
@@ -133,7 +121,7 @@
                 </tbody>
               </table>
               <div class="mt-4">
-                {{ $users->links('.layouts.paginationcustom') }}
+                {{ $areas->links('.layouts.paginationcustom') }}
               </div>
             </div>            
           </section>
@@ -142,11 +130,11 @@
     </div>
   </div>
   {{-- Modal --}}
-  @foreach ($users as $user)
-  <div id="popup-modal{{ $user->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  @foreach ($areas as $area)
+  <div id="popup-modal-restore{{ $area->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-md max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{ $user->id }}">
+        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-restore{{ $area->id }}">
           <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
           </svg>
@@ -156,16 +144,41 @@
           <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
           </svg>
-          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will archive the data. Are you sure you want to archive the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $user->name }}</span>"?</h3>
+          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will restore archived data. Are you sure you want to restore the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $area->name }}</span>"?</h3>
           <div class="inline-flex">
-            <form method="POST" action="{{ route('user.destroy', $user->id) }}">
+            <a href="{{ route('area.restore', $area->id) }}" class="text-gray-700 dark:text-gray-300 hover:bg-green-700 dark:hover:bg-green-800 hover:text-white dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-green-500 dark:focus:ring-green-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 mb-2">
+              Yes, I'm sure
+            </a>    
+            <button data-modal-hide="popup-modal-restore{{ $area->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup-modal-destroy{{ $area->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-destroy{{ $area->id }}">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+        <div class="p-6 text-center">
+          <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+          </svg>
+          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will permanently delete the data. Are you sure you want to delete the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $area->name }}</span>"?</h3>
+          <div class="inline-flex">
+            <form method="POST" action="{{ route('area.destroy-permanently', $area->id) }}">
               @csrf
               @method('DELETE')
-              <button class="text-gray-600 dark:text-gray-300 hover:bg-red-700 dark:hover:bg-red-800 hover:text-white dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-red-500 dark:focus:ring-red-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+              <button class="text-gray-700 dark:text-gray-300 hover:bg-red-700 dark:hover:bg-red-800 hover:text-white dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-red-500 dark:focus:ring-red-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                 Yes, I'm sure
               </button>
-            </form>     
-            <button data-modal-hide="popup-modal{{ $user->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
+            </form>
+            <button data-modal-hide="popup-modal-destroy{{ $area->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
           </div>
         </div>
       </div>

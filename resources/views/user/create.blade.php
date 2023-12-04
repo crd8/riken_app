@@ -46,7 +46,7 @@
                   @forelse ($departments as $department)
                     <div class="flex bg-gray-100 p-2 rounded items-center">
                       <label>
-                        <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="department" value="{{ $department->id }}">
+                        <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="radio" name="department" value="{{ $department->id }}">
                         <span class="capitalize text-gray-800">
                           {{ $department->name }}
                         </span>
@@ -63,7 +63,7 @@
                   @forelse ($roles as $role)
                     <div class="flex bg-gray-100 p-2 rounded items-center">
                       <label>
-                        <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="checkbox" name="roles[]" value="{{ $role->name }}"> 
+                        <input class="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" type="radio" name="roles[]" value="{{ $role->name }}"> 
                         <span class="capitalize text-gray-800">
                           {{ $role->name }}
                         </span>
