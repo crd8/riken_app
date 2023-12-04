@@ -9,10 +9,10 @@
             </a>
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
             <header class="max-w-xl">
-              <h2 class="text-lg font-medium text-gray-900 dark:text-gray-200">
+              <h2 class="text-gray-600 dark:text-gray-200">
                 {{ __('Create a new Area') }}
               </h2>
-              <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+              <p class="mt-1 text-sm text-gray-400 dark:text-gray-400">
                 {{ __('The process of creating new area in a system or app.') }}
               </p>
             </header>
@@ -33,7 +33,7 @@
                 <textarea name="address" id="address" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" required>{{ old('address') }}</textarea>
                 <x-input-error class="mt-2" :messages="$errors->get('address')" />
               </div>
-              <button type="submit" class="mt-6 text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-600 dark:hover:bg-sky-700 focus:outline-none dark:focus:ring-sky-800">
+              <button type="submit" class="mt-6 text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-sky-600 dark:hover:bg-sky-700 focus:outline-none dark:focus:ring-sky-800">
                 {{ __('Save Area') }}
               </button>
             </form>

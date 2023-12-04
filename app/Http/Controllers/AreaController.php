@@ -78,7 +78,7 @@ class AreaController extends Controller
             'address' => $request->address
         ]);
 
-        return redirect()->route('area.index')->with('message', "Area {$request->name} created successfully");
+        return redirect()->route('area.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: New data has been successfully created.");
     }
 
     /**
@@ -103,8 +103,8 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
         $request->validate([
-            'code' => ['required', 'string', 'max:50', 'unique:areas'],
-            'name' => ['required', 'string', 'max:90', 'unique:areas'],
+            'code' => ['required', 'string', 'max:50'],
+            'name' => ['required', 'string', 'max:90'],
             'address' => ['required', 'string']
         ]);
 
@@ -116,6 +116,71 @@ class AreaController extends Controller
             'address' => $request->address
         ]);
 
-        return redirect()->route('area.index')->with('message', "Area {$oldAreaName} successfully updated to {$request->name}");
+        return redirect()->route('area.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: data has been successfully updated.");
+    }
+
+    /**
+     * delete record area
+    */
+    public function destroy(Area $area)
+    {
+        $nameArea = $area->name;
+        $area->delete();
+        return redirect()->route('area.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameArea}</span> has been archived: Open the archive to view or restore it.");
+    }
+
+    /**
+     * list data trashed
+    */
+    public function trash()
+    {
+        $areas = (new Area)->newQuery();
+        if (request()->has('search')) {
+            $areas->where('name', 'Like', '%' . request()->input('search') . '%');
+        }
+
+        $order = request()->query('order', 'latest');
+
+        if ($order === 'oldest') {
+            $areas->oldest('deleted_at');
+        } else {
+            $areas->latest('deleted_at');
+        }
+
+        $areas = $areas->onlyTrashed()->paginate(10);
+
+        $currentPage = $areas->currentPage();
+        $perPage = $areas->perPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
+
+        return view('area.trash', compact('areas', 'order', 'startNumber'));
+    }
+
+    /**
+     * restore record from archived to active
+    */
+    public function restore($id)
+    {
+        $area = Area::withTrashed()->find($id);
+        $nameArea = $area->name;
+
+        if ($area) {
+            $area->restore();
+            return redirect()->route('area.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameArea}</span> has been restored, data is now active again in the system.");
+        }
+    }
+
+    /**
+     * force delete the record from db
+    */
+    public function destroyPermanently($id)
+    {
+        $area = Area::withTrashed()->find($id);
+        $nameArea = $area->name;
+
+        if ($area) {
+            $area->forceDelete();
+            return redirect()->route('area.trash')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameArea}</span> has been permanently deleted.");
+        }
     }
 }

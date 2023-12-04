@@ -54,7 +54,7 @@
             </div>
             <div class="relative overflow-x-auto sm:rounded-lg mt-8">
               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" class="px-6 py-3">
                       {{ __('#') }}
@@ -79,27 +79,27 @@
                 </thead>
                 <tbody>
                   @foreach ($permissions as $permission)
-                  <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                  <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/70 dark:hover:bg-gray-800/60">
                     <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $startNumber++ }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 whitespace-nowrap">
                       {{ $permission->name }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 whitespace-nowrap">
                       {{ Carbon\Carbon::parse($permission->created_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 whitespace-nowrap">
                       {{ Carbon\Carbon::parse($permission->deleted_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    <td class="flex items-center px-6 py-4 space-x-3">
+                    <td class="flex items-center px-6 py-4 whitespace-nowrap space-x-3">
                       @canany(['permission create'])
-                      <button class="hover:underline" data-modal-toggle="popup-modal-restore{{ $permission->id }}" data-modal-target="popup-modal-restore{{ $permission->id }}">
+                      <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-restore{{ $permission->id }}" data-modal-target="popup-modal-restore{{ $permission->id }}">
                         {{ __('Restore') }}
                       </button>
                       @endcanany
                       @canany(['permission delete'])
-                      <button class="hover:underline" data-modal-toggle="popup-modal-destroy{{ $permission->id }}" data-modal-target="popup-modal-destroy{{ $permission->id }}">
+                      <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-destroy{{ $permission->id }}" data-modal-target="popup-modal-destroy{{ $permission->id }}">
                         {{ __('Destroy') }}
                       </button>
                       @endcanany

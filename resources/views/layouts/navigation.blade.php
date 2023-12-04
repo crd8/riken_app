@@ -1,20 +1,20 @@
 
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+<nav class="bg-sky-600 dark:bg-gray-800">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <button type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" data-drawer-target="drawer-navigation" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
+    <button type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-50 rounded bg-sky-700 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-50 dark:text-gray-400" data-drawer-target="drawer-navigation" data-drawer-backdrop="false" data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
       <span class="sr-only">Open main menu</span>
-      <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+      <svg class="w-6 h-6 text-gray-50" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
       </svg>
     </button>
     <div class="flex items-center md:order-2">
-      <button id="theme-toggle" type="button" class="mr-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
-        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-sky-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-sky-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+      <button id="theme-toggle" type="button" class="mr-4 text-gray-500 dark:text-gray-400 focus:outline-none rounded text-sm p-2.5">
+        <svg id="theme-toggle-dark-icon" class="hidden w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        <svg id="theme-toggle-light-icon" class="hidden w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
       </button>
       <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="https://source.unsplash.com/adult-brown-cat-Ah_QC2v2alE" alt="">
+        <img class="w-8 h-8 rounded-full" src="--https://source.unsplash.com/adult-brown-cat-Ah_QC2v2alE" alt="">
       </button>
       <!-- Dropdown menu -->
       <div class="z-50 hidden my-4 list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-900 dark:divide-gray-700" id="user-dropdown">
@@ -59,8 +59,8 @@
         </a>
       </li>
       <li>
-        <button type="button" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'role.index', 'role.create', 'role.edit', 'role.show', 'user.index', 'user.create', 'user.edit', 'user.show') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-administrator" data-collapse-toggle="dropdown-administrator">
-          <svg class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'role.index', 'role.create', 'role.edit', 'role.show', 'user.index', 'user.create', 'user.edit', 'user.show') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+        <button type="button" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'permission.trash', 'role.index', 'role.create', 'role.edit', 'role.show', 'role.trash', 'user.index', 'user.create', 'user.edit', 'user.show', 'user.trash') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-administrator" data-collapse-toggle="dropdown-administrator">
+          <svg class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'permission.trash', 'role.index', 'role.create', 'role.edit', 'role.show', 'role.trash', 'user.index', 'user.create', 'user.edit', 'user.show', 'user.trash') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
             <path d="m17.351 3.063-8-3a1.009 1.009 0 0 0-.7 0l-8 3A1 1 0 0 0 0 4a19.394 19.394 0 0 0 8.47 15.848 1 1 0 0 0 1.06 0A19.394 19.394 0 0 0 18 4a1 1 0 0 0-.649-.937Zm-3.644 4.644-5 5A1 1 0 0 1 8 13c-.033 0-.065 0-.1-.005a1 1 0 0 1-.733-.44l-2-3a1 1 0 0 1 1.664-1.11l1.323 1.986 4.138-4.138a1 1 0 0 1 1.414 1.414h.001Z"/>
           </svg>
           <span class="flex-1 ml-3 text-left whitespace-nowrap">Administrator</span>
@@ -70,25 +70,25 @@
         </button>
         <ul id="dropdown-administrator" class="hidden py-2 space-y-2">
           <li>
-            <a href="{{ route('permission.index') }}" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('permission.index') }}" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'permission.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Permissions') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('role.index') }}" class="{{ request()->routeIs('role.index', 'role.create', 'role.edit', 'role.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('role.index') }}" class="{{ request()->routeIs('role.index', 'role.create', 'role.edit', 'role.show', 'role.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Roles') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('user.index') }}" class="{{ request()->routeIs('user.index', 'user.create', 'user.edit', 'user.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('user.index') }}" class="{{ request()->routeIs('user.index', 'user.create', 'user.edit', 'user.show', 'user.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Users') }}
             </a>
           </li>
         </ul>
       </li>
       <li>
-        <button type="button" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-plant-layout" data-collapse-toggle="dropdown-plant-layout">
-          <svg class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+        <button type="button" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show', 'department.trash', 'area.index', 'area.create', 'area.edit', 'area.show', 'area.trash') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-business-layout" data-collapse-toggle="dropdown-business-layout">
+          <svg class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show', 'department.trash', 'area.index', 'area.create', 'area.edit', 'area.show', 'area.trash') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
             <path d="M17 16h-1V2a1 1 0 1 0 0-2H2a1 1 0 0 0 0 2v14H1a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM5 4a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4Zm0 5V8a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1Zm6 7H7v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3Zm2-7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1Zm0-4a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1Z"/>
           </svg>
           <span class="flex-1 ml-3 text-left whitespace-nowrap">Business</span>
@@ -96,15 +96,39 @@
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
           </svg>
         </button>
-        <ul id="dropdown-plant-layout" class="hidden py-2 space-y-2">
+        <ul id="dropdown-business-layout" class="hidden py-2 space-y-2">
           <li>
-            <a href="{{ route('department.index') }}" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('department.index') }}" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show', 'department.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Departments') }}
             </a>
           </li>
           <li>
-            <a href="{{ route('area.index') }}" class="{{ request()->routeIs('area.index', 'area.create', 'area.edit', 'area.show') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('area.index') }}" class="{{ request()->routeIs('area.index', 'area.create', 'area.edit', 'area.show', 'area.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Areas') }}
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <button type="button" class="{{ request()->routeIs('') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-mapping-layout" data-collapse-toggle="dropdown-mapping-layout">
+          <svg class="{{ request()->routeIs('') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+            <path d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+          </svg>
+          <span class="flex-1 ml-3 text-left whitespace-nowrap">Mapping</span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+        </button>
+        <ul id="dropdown-mapping-layout" class="hidden py-2 space-y-2">
+          <li>
+            <a href="{{ route('location.index') }}" class="{{ request()->routeIs('') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+              {{ __('Locations') }}
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('area.index') }}" class="{{ request()->routeIs('') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+              {{ __('Spots') }}
             </a>
           </li>
         </ul>
