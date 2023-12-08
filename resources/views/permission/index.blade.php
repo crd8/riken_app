@@ -1,14 +1,14 @@
 <x-app-layout>
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-gray-200 dark:bg-gray-800 overflow-hidden rounded-lg">
+      <div class="bg-gray-50 dark:bg-gray-800 overflow-hidden rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
             <header class="max-w-xl">
               <h2 class="text-gray-800 text-lg font-semibold dark:text-gray-200">
                 {{ __('List of Permissions') }}
               </h2>
-              <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">
+              <p class="text-sm text-gray-700 dark:text-gray-300">
                 {{ __('This list lists all the permissions available in the system.') }}
               </p>
             </header>
@@ -87,7 +87,7 @@
                 </thead>
                 <tbody>
                   @foreach ($permissions as $permission)
-                  <tr class="border-b border-gray-500/30 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/70 dark:hover:bg-gray-800/60">
+                  <tr class="border-b border-gray-500/30 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/50 dark:hover:bg-gray-800/90">
                     <td scope="row" class="px-6 py-3 whitespace-nowrap">
                       {{ $startNumber++ }}
                     </td>
@@ -106,7 +106,7 @@
                         {{ __('Edit') }}
                       </a>
                       <button class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal{{ $permission->id }}" data-modal-target="popup-modal{{ $permission->id }}">
-                        {{ __('Delete') }}
+                        {{ __('Archive') }}
                       </button>
                       @endcanany
                     </td>
@@ -136,28 +136,30 @@
   {{-- Modal --}}
   @foreach ($permissions as $permission)
   <div id="popup-modal{{ $permission->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-md max-h-full">
+    <div class="relative w-full max-w-xl max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal{{ $permission->id }}">
-          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-          </svg>
-          <span class="sr-only">Close modal</span>
-        </button>
-        <div class="p-6 text-center">
-          <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-          </svg>
-          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-300"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will archive the data. Are you sure you want to archive the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $permission->name }}</span>"?</h3>
-          <div class="inline-flex">
-            <form method="POST" action="{{ route('permission.destroy', $permission->id) }}">
-              @csrf
-              @method('DELETE')
-              <button class="text-gray-600 dark:text-gray-300 hover:bg-red-700 dark:hover:bg-red-800 hover:text-white dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-red-500 dark:focus:ring-red-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                Yes, I'm sure
-              </button>
-            </form>     
-            <button data-modal-hide="popup-modal{{ $permission->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
+        <div>
+          <div class="p-8">
+            <h1 class="text-gray-900 dark:text-gray-300 text-md font-semibold mb-2">Archive this <span class="font-bold underline text-gray-950 dark:text-gray-200">{{ $permission->name }}</span>?</h1>
+            <p class="text-sm text-gray-800 dark:text-gray-300">Performing this action will archive the data. Are you certain you wish to proceed with archiving the data associated with the specified name? You will have the option to either restore or permanently delete the data later.</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-gray-100 dark:bg-gray-700 border-t dark:border-t-gray-600 rounded-b-md">
+              <div class="py-3 inline-flex w-full mt-3 gap-4 px-8">
+                <div class="basis-1/2">
+                  <form method="POST" action="{{ route('permission.destroy', $permission->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-yellow-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-yellow-500 rounded text-sm font-semibold px-5 py-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">
+                      Yes, archive
+                    </button>
+                  </form>     
+                </div>
+                <div class="basis-1/2">
+                  <button data-modal-hide="popup-modal{{ $permission->id }}" type="button" class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">No, cancel</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
