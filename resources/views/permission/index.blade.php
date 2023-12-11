@@ -12,7 +12,6 @@
                 {{ __('This list lists all the permissions available in the system.') }}
               </p>
             </header>
-            {{-- <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"> --}}
             <div class="flex justify-between items-center mt-7">
               <div>
                 @can('permission create')
@@ -23,7 +22,6 @@
                   {{ __('Archived Data') }}
                 </a>
                 @endcan
-                
               </div>
               <form class="w-4/12" action="{{ route('permission.index') }}" method="GET">   
                 <label for="default-search" class="mb-2 text-sm text-gray-900 sr-only dark:text-white">Search</label>
