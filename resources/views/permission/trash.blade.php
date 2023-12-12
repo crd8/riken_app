@@ -85,10 +85,10 @@
                     <td class="px-6 py-3 whitespace-nowrap">
                       {{ $permission->name }}
                     </td>
-                    <td class="px-6 py-3 whitespace-nowrap">
+                    <td class="px-6 py-3">
                       {{ Carbon\Carbon::parse($permission->created_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    <td class="px-6 py-3 whitespace-nowrap">
+                    <td class="px-6 py-3">
                       {{ Carbon\Carbon::parse($permission->deleted_at)->format('l, d F Y, H:i A') }}
                     </td>
                     <td class="flex items-center px-6 py-3 whitespace-nowrap space-x-3">

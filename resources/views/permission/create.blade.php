@@ -18,7 +18,6 @@
                 {{ __('The process of creating new permissions in a system or app.') }}
               </p>
             </header>
-            
             <form class="max-w-xl" action="{{ route('permission.store') }}" method="POST">
               @csrf
               <div class="mt-6">

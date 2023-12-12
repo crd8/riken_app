@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
                   <tr class="border-b border-gray-500/30 dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/50 dark:hover:bg-gray-800/90">
-                    <th scope="row" class="px-6 py-4 whitespace-nowrap">
+                    <th scope="row" class="px-6 py-3 whitespace-nowrap">
                       {{ $role->name }}
                     </th>
                     <td class="px-6 py-3 whitespace-nowrap">
