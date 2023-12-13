@@ -1,34 +1,33 @@
 <x-app-layout>
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="bg-gray-50 dark:bg-gray-800 overflow-hidden rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
-            <a class="text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-700" href="{{ route('area.index') }}">
-              {{ __('Back to All Active Areas') }}
-            </a>
-            <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-            <div class="flex justify-between">
+            <header class="max-w-xl">
+              <h2 class="text-gray-800 text-lg font-semibold dark:text-gray-200">
+                {{ __('List of deleted Area') }}
+              </h2>
+              <p class="text-sm text-gray-700 dark:text-gray-300">
+                {{ __('This list lists all the area are deleted in the system.') }}
+              </p>
+            </header>
+            <div class="flex justify-between items-center mt-7">
               <div>
-                <header class="max-w-xl">
-                  <h2 class="text-gray-600 dark:text-gray-200">
-                    {{ __('List of deleted Area') }}
-                  </h2>
-                  <p class="mt-1 text-sm text-gray-400 dark:text-gray-400">
-                    {{ __('This list lists all the area are deleted in the system.') }}
-                  </p>
-                </header>
+                <a class="border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75" href="{{ route('area.index') }}">
+                  {{ __('Back to All Active Areas') }}
+                </a>
               </div>
               <form class="w-4/12" action="{{ route('area.trash') }}" method="GET">   
                 <label for="default-search" class="mb-2 text-sm text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <svg class="w-5 h-5 text-sky-700 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-                    <input name="search" type="search" value="{{ request()->input('search') }}" autofocus autocomplete="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-sky-500 focus:border-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500" placeholder="Search...">
-                    <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded-lg text-sm px-4 py-2 dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">Search</button>
+                    <input name="search" type="search" value="{{ request()->input('search') }}" autofocus autocomplete="search" id="default-search" class="block w-full px-5 py-2.5 pl-10 text-sm text-gray-900 border border-gray-500/40 rounded bg-gray-50 focus:ring-gray-700 focus:border-gray-700 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 placeholder:italic dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-400" placeholder="Search data...">
+                    <button type="submit" class="text-gray-700 dark:text-gray-200 hover:text-sky-50 font-semibold bg-gray-200 hover:bg-sky-600 absolute right-2.5 bottom-2 focus:ring-4 focus:outline-none focus:ring-sky-300 rounded text-sm px-2.5 py-1 dark:bg-gray-600 dark:hover:bg-sky-700 dark:focus:ring-sky-800">Search</button>
                 </div>
               </form>
             </div>
@@ -52,9 +51,9 @@
               </div>
               @endif
             </div>
-            <div class="relative overflow-x-auto sm:rounded-lg mt-8">
-              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+            <div class="relative overflow-x-auto rounded mt-5">
+              <table class="border border-gray-500/30 dark:border-gray-600 w-full text-sm text-left bg-gray-100 text-gray-700 dark:text-gray-400">
+                <thead class="text-sm border-b border-gray-500/30 dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" class="px-6 py-3">
                       {{ __('#') }}
@@ -86,33 +85,33 @@
                 <tbody>
                   @foreach ($areas as $area)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/70 dark:hover:bg-gray-800/60">
-                    <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                    <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $startNumber++ }}
                     </td>
-                    <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                    <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $area->code }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-3">
                       {{ $area->name }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-3">
                       {{ $area->address }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-3">
                       {{ Carbon\Carbon::parse($area->created_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-3">
                       {{ Carbon\Carbon::parse($area->deleted_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    <td class="flex items-center px-6 py-4 space-x-3">
+                    <td class="flex items-center px-6 py-3 space-x-3">
                       @canany(['area create'])
-                      <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-restore{{ $area->id }}" data-modal-target="popup-modal-restore{{ $area->id }}">
+                      <button class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-restore{{ $area->id }}" data-modal-target="popup-modal-restore{{ $area->id }}">
                         {{ __('Restore') }}
                       </button>
                       @endcanany
                       @canany(['area delete'])
-                      <button class="text-sm border border-gray-300 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-destroy{{ $area->id }}" data-modal-target="popup-modal-destroy{{ $area->id }}">
-                        {{ __('Destroy') }}
+                      <button class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-destroy{{ $area->id }}" data-modal-target="popup-modal-destroy{{ $area->id }}">
+                        {{ __('Delete') }}
                       </button>
                       @endcanany
                     </td>
@@ -131,25 +130,27 @@
   </div>
   {{-- Modal --}}
   @foreach ($areas as $area)
-  <div id="popup-modal-restore{{ $area->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-md max-h-full">
+  <div id="popup-modal-restore{{ $area->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full box-border">
+    <div class="relative w-full max-w-xl max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-restore{{ $area->id }}">
-          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-          </svg>
-          <span class="sr-only">Close modal</span>
-        </button>
-        <div class="p-6 text-center">
-          <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-          </svg>
-          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will restore archived data. Are you sure you want to restore the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $area->name }}</span>"?</h3>
-          <div class="inline-flex">
-            <a href="{{ route('area.restore', $area->id) }}" class="text-gray-700 dark:text-gray-300 hover:bg-green-700 dark:hover:bg-green-800 hover:text-white dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-green-500 dark:focus:ring-green-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 mb-2">
-              Yes, I'm sure
-            </a>    
-            <button data-modal-hide="popup-modal-restore{{ $area->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
+        <div>
+          <div class="p-8">
+            <h1 class="text-gray-800 dark:text-gray-300 text-md font-semibold mb-2">Restore this <span class="font-bold underline text-gray-950 dark:text-gray-200">{{ $area->name }}</span>?</h1>
+            <p class="text-sm text-gray-800 dark:text-gray-300">Performing this action will restore the data. Are you certain you wish to proceed with restoring the data associated with the specified name?</p>
+          </div>
+          <div>
+            <div class="bg-gray-100 dark:bg-gray-700 border-t dark:border-t-gray-600 rounded-b-md">
+              <div class="py-3 inline-flex w-full mt-3 gap-4 px-8">
+                <div class="basis-1/2">
+                  <a href="{{ route('area.restore', $area->id) }}" class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-green-500 rounded text-sm font-semibold px-5 py-2 mb-2 inline-flex items-center justify-center focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">
+                    Yes, restore
+                  </a>
+                </div>
+                <div class="basis-1/2">
+                  <button data-modal-hide="popup-modal-restore{{ $area->id }}" type="button" class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2 mb-2 inline-flex items-center justify-center focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">No, cancel</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -157,28 +158,30 @@
   </div>
 
   <div id="popup-modal-destroy{{ $area->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-md max-h-full">
+    <div class="relative w-full max-w-xl max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-destroy{{ $area->id }}">
-          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-          </svg>
-          <span class="sr-only">Close modal</span>
-        </button>
-        <div class="p-6 text-center">
-          <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-          </svg>
-          <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400"><span class="font-bold uppercase text-yellow-500">Warning</span>: This action will permanently delete the data. Are you sure you want to delete the data with the name "<span class="font-bold underline text-gray-700 dark:text-gray-200">{{ $area->name }}</span>"?</h3>
-          <div class="inline-flex">
-            <form method="POST" action="{{ route('area.destroy-permanently', $area->id) }}">
-              @csrf
-              @method('DELETE')
-              <button class="text-gray-700 dark:text-gray-300 hover:bg-red-700 dark:hover:bg-red-800 hover:text-white dark:hover:text-white focus:ring-4 focus:outline-none focus:ring-red-500 dark:focus:ring-red-800 rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                Yes, I'm sure
-              </button>
-            </form>
-            <button data-modal-hide="popup-modal-destroy{{ $area->id }}" type="button" class="text-gray-700 dark:text-gray-300 bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:ring-gray-300 rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-800">No, cancel</button>
+        <div>
+          <div class="p-8">
+            <h1 class="text-gray-800 dark:text-gray-300 text-md font-semibold mb-2">Delete this <span class="font-bold underline text-gray-950 dark:text-gray-200">{{ $area->name }}</span>?</h1>
+            <p class="text-sm text-gray-800 dark:text-gray-300">Performing this action will delete the data. Are you certain you wish to proceed with deleting the data associated with the specified name? Once the data is deleted, it cannot be recovered.</p>
+          </div>
+          <div class="text-center">
+            <div class="bg-gray-100 dark:bg-gray-700 border-t dark:border-t-gray-600 rounded-b-md">
+              <div class="py-3 inline-flex w-full mt-3 gap-4 px-8">
+                <div class="basis-1/2">
+                  <form method="POST" action="{{ route('area.destroy-permanently', $area->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-red-500 rounded text-sm font-semibold px-5 py-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">
+                      Yes, delete
+                    </button>
+                  </form>     
+                </div>
+                <div class="basis-1/2">
+                  <button data-modal-hide="popup-modal-destroy{{ $area->id }}" type="button" class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">No, cancel</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

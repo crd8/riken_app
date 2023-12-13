@@ -114,7 +114,7 @@
                       @endcanany
                       @canany(['user delete'])
                       <button class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-destroy{{ $user->id }}" data-modal-target="popup-modal-destroy{{ $user->id }}">
-                        {{ __('Destroy') }}
+                        {{ __('Delete') }}
                       </button>
                       @endcanany
                     </td>

@@ -107,7 +107,7 @@
                           {{ __('Edit') }}
                         </a>
                         <button class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal{{ $role->id }}" data-modal-target="popup-modal{{ $role->id }}">
-                          {{ __('Delete') }}
+                          {{ __('Archive') }}
                         </button>
                       @endcanany
                     </td>
