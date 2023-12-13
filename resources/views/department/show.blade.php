@@ -1,6 +1,6 @@
 <x-app-layout>
   <div class="py-12">
-    <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-gray-50 dark:bg-gray-800 overflow-hidden rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
@@ -30,6 +30,12 @@
                   <th scope="col" class="px-6 py-3 whitespace-nowrap">
                     {{ __('Description') }}
                   </th>
+                  <th scope="col" class="px-6 py-3">
+                    {{ __('Created at') }}
+                  </th>
+                  <th scope="col" class="px-6 py-3">
+                    {{ __('Modified at') }}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -42,6 +48,12 @@
                   </td>
                   <td class="px-6 py-3">
                     {{ $department->description }}
+                  </td>
+                  <td class="px-6 py-3">
+                    {{ Carbon\Carbon::parse($department->created_at)->format('l, d F Y, H:i A') }}
+                  </td>
+                  <td class="px-6 py-3">
+                    {{ Carbon\Carbon::parse($department->updated_at)->format('l, d F Y, H:i A') }}
                   </td>
                 </tr>
               </tbody>
