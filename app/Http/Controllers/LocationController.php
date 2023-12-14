@@ -67,4 +67,31 @@ class LocationController extends Controller
         $areas = Area::all();
         return view('location.create', compact('areas'));
     }
+
+    /**
+     * store data location to db
+    */
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        // Pengecekan nilai area_id
+    // if (!$request->has('area_id')) {
+    //     dd('area_id is not present in the request');
+    // }
+        $request->validate([
+            'code' => ['required', 'string', 'max:15', 'unique:areas,code', 'unique:locations,code'],
+            'name' => ['required', 'string', 'max:35', 'unique:locations,name'],
+            'description' => ['required', 'string'],
+            'area_id' => ['required'],
+        ]);
+
+        $location = Location::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'area_id' => $request->area_id
+        ]);
+
+        return redirect()->route('location.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: New data has been successfully created.");
+    }
 }
