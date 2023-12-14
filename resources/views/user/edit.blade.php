@@ -1,6 +1,6 @@
 <x-app-layout>
   <div class="py-12">
-    <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-gray-50 dark:bg-gray-800 overflow-hidden rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
@@ -52,6 +52,19 @@
                 </div>
               </div>
               <div class="mt-6">
+                <label for="department_id" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Department</label>
+                <select name="department_id" id="department_id" class="dark:bg-gray-700 text-sm w-7/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30">
+                  <option value=""></option>
+                  @forelse ($departments as $department)
+                  <option {{ $user->department->id === $department->id ? 'selected' : '' }} value="{{ $department->id }}">{{ $department->name }}</option>
+                  @empty
+                    ----
+                  @endforelse
+                </select>
+                @foreach ($errors->get('department_id') as $error)
+                  <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
+                @endforeach
+{{--                 
                 <h3 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</h3>
                 <div class="grid grid-cols-2 gap-2 text-sm">
                   @forelse ($departments as $department)
@@ -66,10 +79,23 @@
                   @empty
                     ----
                   @endforelse
-                </div>
+                </div> --}}
               </div>
               <div class="mt-6">
-                <h3 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</h3>
+                <label for="role" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Role</label>
+                <select name="role" id="role" class="dark:bg-gray-700 text-sm w-7/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30">
+                  <option value=""></option>
+                  @forelse ($roles as $role)
+                  <option {{ in_array($role->id, $userHasRoles) ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->name }}</option>
+                  @empty
+                    ----
+                  @endforelse
+                </select>
+                @foreach ($errors->get('role') as $error)
+                  <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
+                @endforeach
+                
+                {{-- <h3 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</h3>
                 <div class="grid grid-cols-4 gap-2 text-sm">
                   @forelse ($roles as $role)
                     <div class="flex bg-gray-200 dark:bg-gray-600 p-2 rounded items-center">
@@ -83,7 +109,7 @@
                   @empty
                     ----
                   @endforelse
-                </div>
+                </div> --}}
               </div>
 
               <button type="submit" class="mt-6 border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">
