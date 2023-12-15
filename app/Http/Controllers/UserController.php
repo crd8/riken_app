@@ -141,7 +141,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'department_id' => $request->department
+            'department_id' => $request->department_id
         ]);
         if ($request->password) {
             $user->update([

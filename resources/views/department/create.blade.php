@@ -36,7 +36,7 @@
               </div>
               <div class="mt-6">
                 <label for="description" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Description</label>
-                <textarea name="description" id="description" rows="4" class="dark:bg-gray-700 text-sm w-8/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>{{ old('description') }}</textarea>
+                <textarea name="description" id="description" rows="4" class="dark:bg-gray-700 text-sm w-11/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>{{ old('description') }}</textarea>
                 @foreach ($errors->get('description') as $error)
                     <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
                 @endforeach
