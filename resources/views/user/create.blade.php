@@ -1,6 +1,6 @@
 <x-app-layout>
   <div class="py-12">
-    <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-gray-50 dark:bg-gray-800 overflow-hidden rounded-lg">
         <div class="p-8 text-gray-900 dark:text-gray-200">
           <section>
@@ -20,35 +20,36 @@
             </header>
             <form action="{{ route('user.store') }}" method="POST">
               @csrf
-              <div class="max-w-xl">
-                <div class="mt-6">
+              
+              <div class="grid grid-cols-2 gap-4">
+                <div class="">
                   <label for="name" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Name</label>
-                  <input type="text" id="name" name="name" value="{{ old('name') }}" class="dark:bg-gray-700 text-sm w-8/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required autofocus>
+                  <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full block dark:bg-gray-700 text-sm text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required autofocus>
                   @foreach ($errors->get('name') as $error)
                     <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
                   @endforeach
                 </div>
-                <div class="mt-6">
+                <div class="">
                   <label for="email" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Email</label>
-                  <input type="email" id="email" name="email" value="{{ old('email') }}" class="dark:bg-gray-700 text-sm w-8/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>
+                  <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full block dark:bg-gray-700 text-sm text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>
                   @foreach ($errors->get('email') as $error)
                     <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
                   @endforeach
                 </div>
-                <div class="mt-6">
-                  <label for="password" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Password</label>
-                  <input type="password" id="password" name="password" class="dark:bg-gray-700 text-sm w-8/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>
-                  @foreach ($errors->get('password') as $error)
-                    <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
-                  @endforeach
-                </div>
-                <div class="mt-6">
-                  <label for="password_confirmation" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Password Confirmation</label>
-                  <input type="password" id="password_confirmation" name="password_confirmation" class="dark:bg-gray-700 text-sm w-8/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>
-                  @foreach ($errors->get('password_confirmation') as $error)
-                    <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
-                  @endforeach
-                </div>
+              </div>
+              <div class="mt-6">
+                <label for="password" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Password</label>
+                <input type="password" id="password" name="password" class="dark:bg-gray-700 text-sm w-8/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>
+                @foreach ($errors->get('password') as $error)
+                  <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
+                @endforeach
+              </div>
+              <div class="mt-6">
+                <label for="password_confirmation" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Password Confirmation</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" class="dark:bg-gray-700 text-sm w-8/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>
+                @foreach ($errors->get('password_confirmation') as $error)
+                  <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
+                @endforeach
               </div>
               <div class="mt-6">
                 <label for="department_id" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Department</label>

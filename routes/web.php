@@ -78,6 +78,11 @@ Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth']
     Route::get('area/trash', [AreaController::class, 'trash'])->name('area.trash');
     Route::get('area/restore/{id}', [AreaController::class, 'restore'])->name('area.restore');
     Route::delete('area/destroy-permanently/{id}', [AreaController::class, 'destroyPermanently'])->name('area.destroy-permanently');
+
+    // Location
+    Route::get('location/trash', [LocationController::class, 'trash'])->name('location.trash');
+    Route::get('location/restore/{id}', [LocationController::class, 'restore'])->name('location.restore');
+    Route::delete('location/destroy-permanently/{id}', [LocationController::class, 'destroyPermanently'])->name('location.destroy-permanently');
 });
 
 require __DIR__.'/auth.php';
