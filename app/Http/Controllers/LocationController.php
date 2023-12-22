@@ -51,7 +51,7 @@ class LocationController extends Controller
             $locations->latest('created_at');
         }
 
-        $locations = $locations->with('area')->paginate(10);
+        $locations = $locations->with('areas')->paginate(10);
         $currentPage = $locations->currentPage();
         $perPage = $locations->perPage();
         $startNumber = ($currentPage - 1) * $perPage + 1;

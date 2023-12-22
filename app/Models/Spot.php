@@ -6,23 +6,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Location extends Model
+class Spot extends Model
 {
     // use HasFactory;
-    use SoftDeletes;
-
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'code',
         'name',
         'description',
-        'area_id'
+        'area_id',
+        'location_id'
     ];
 
     /**
      * relasi belongsTo ke model area
-     * 1 location hanya bisa mempunyai 1 area
+     * 1 spot hanya bisa mempunyai 1 area
     */
     public function areas()
     {
@@ -30,11 +29,11 @@ class Location extends Model
     }
 
     /**
-     * relasi hasMany ke model spot
-     * 1 location bisa mempunyai banyak spot
+     * relasi belongsTo ke model location
+     * 1 spot hanya bisa mempunya 1 location
     */
-    public function spots()
+    public function locations()
     {
-        return $this->hasMany(Spot::class);
+        return $this->belongsTo(Location::class);
     }
 }
