@@ -50,7 +50,8 @@ class User extends Authenticatable
     protected $dates = ['deleted_at'];
 
     /**
-     * define relasi belongsTo ke model Department
+     * relasi belongsTo ke model department
+     * 1 user hanya bisa mempunyai 1 department
     */
     public function department()
     {

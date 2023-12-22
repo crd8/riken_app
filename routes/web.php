@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\SpotController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/get-locations/{id}', [SpotController::class, 'getLocations']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -51,6 +54,7 @@ Route::prefix('business')->namespace('App\Http\Controllers')->middleware(['auth'
 
 Route::prefix('mapping')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
     Route::resource('location', LocationController::class);
+    Route::resource('spot', SpotController::class);
 });
 
 Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
