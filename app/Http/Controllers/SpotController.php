@@ -22,9 +22,10 @@ class SpotController extends Controller
 
     public function getLocations($id)
     {
-        $locations = Location::where('area_id', $id)->pluck('name', 'id');
+        $locations = Location::where('area_id', $id)->select('id', 'name', 'code')->get();
         return response()->json($locations);
     }
+
 
 
     /**
@@ -59,7 +60,7 @@ class SpotController extends Controller
             $spots->latest('created_at');
         }
 
-        $spots = $spots->with('areas', 'locations')->paginate(10);
+        $spots = $spots->with('area', 'location')->paginate(10);
         $currentPage = $spots->currentPage();
         $perPage = $spots->perPage();
         $startNumber = ($currentPage - 1) * $perPage + 1;
@@ -82,7 +83,23 @@ class SpotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'code' => ['required', 'string', 'max:30', 'unique:areas,code', 'unique:locations,code', 'unique:spots,code'],
+            'name' => ['required', 'string', 'max:25', 'unique:spots,name'],
+            'description' => ['required'],
+            'area_id' => ['required'],
+            'location_id' => ['required']
+        ]);
+
+        $spot = Spot::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'area_id' => $request->area_id,
+            'location_id' => $request->location_id
+        ]);
+
+        return redirect()->route('spot.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: New data has been successfully created.");
     }
 
     /**

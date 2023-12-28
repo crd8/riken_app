@@ -24,7 +24,7 @@ class Location extends Model
      * relasi belongsTo ke model area
      * 1 location hanya bisa mempunyai 1 area
     */
-    public function areas()
+    public function area()
     {
         return $this->belongsTo(Area::class);
     }
@@ -33,7 +33,7 @@ class Location extends Model
      * relasi hasMany ke model spot
      * 1 location bisa mempunyai banyak spot
     */
-    public function spots()
+    public function spot()
     {
         return $this->hasMany(Spot::class);
     }

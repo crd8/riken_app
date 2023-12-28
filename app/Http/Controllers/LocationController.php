@@ -51,7 +51,7 @@ class LocationController extends Controller
             $locations->latest('created_at');
         }
 
-        $locations = $locations->with('areas')->paginate(10);
+        $locations = $locations->with('area')->paginate(10);
         $currentPage = $locations->currentPage();
         $perPage = $locations->perPage();
         $startNumber = ($currentPage - 1) * $perPage + 1;
@@ -111,7 +111,7 @@ class LocationController extends Controller
     {
         $request->validate([
             'code' => ['required', 'string', 'max:15', 'unique:areas,code', 'unique:locations,code'],
-            'name' => ['required', 'string', 'max:35', 'unique:locations,name'],
+            'name' => ['required', 'string', 'max:35'],
             'description' => ['required', 'string'],
             'area_id' => ['required'],
         ]);
