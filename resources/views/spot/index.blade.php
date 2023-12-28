@@ -74,6 +74,9 @@
                       {{ __('Area') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
+                      {{ __('Location') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                       <a href="{{ route('spot.index', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $spots->currentPage()]) }}">
                         {{ __('Created at') }} {!! ($order === 'oldest' ? '<span class="text-sky-600 ml-1">&#9650;</span>' : '<span class="text-sky-600 ml-1">&#9660;</span>') !!}
                       </a>
@@ -105,6 +108,13 @@
                           {{ $spot->area->name }}
                       @else
                           lokasi ini belum memilikki area nya
+                      @endif
+                    </td>
+                    <td class="px-6 py-3">
+                      @if ($spot->location)
+                          {{ $spot->location->name }}
+                      @else
+                          lokasi ini belum memilikki location nya
                       @endif
                     </td>
                     <td class="px-6 py-3">

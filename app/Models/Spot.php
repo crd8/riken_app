@@ -23,7 +23,7 @@ class Spot extends Model
      * relasi belongsTo ke model area
      * 1 spot hanya bisa mempunyai 1 area
     */
-    public function areas()
+    public function area()
     {
         return $this->belongsTo(Area::class);
     }
@@ -32,7 +32,7 @@ class Spot extends Model
      * relasi belongsTo ke model location
      * 1 spot hanya bisa mempunya 1 location
     */
-    public function locations()
+    public function location()
     {
         return $this->belongsTo(Location::class);
     }

@@ -22,7 +22,7 @@ class Area extends Model
      * relasi hasMany ke model location
      * 1 area bisa mmumpunyai banyak location
     */
-    public function locations()
+    public function location()
     {
         return $this->hasMany(Location::class);
     }
@@ -31,7 +31,7 @@ class Area extends Model
      * relasi hasMany ke model spot
      * 1 area bisa mmumpunyai banyak spot
     */
-    public function spots()
+    public function spot()
     {
         return $this->hasMany(Spot::class);
     }

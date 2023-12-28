@@ -22,7 +22,7 @@ class Department extends Model
     /**
      * define relasi hasMany ke model User
     */
-    public function users()
+    public function user()
     {
         return $this->hasMany(User::class);
     }
