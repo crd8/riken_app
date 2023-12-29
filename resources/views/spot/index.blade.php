@@ -18,9 +18,9 @@
                 <a class="border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75" href="{{ route('spot.create') }}">
                   {{ __('Add a New Spot') }}
                 </a>
-                {{-- <a class="border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75" href="{{ route('spot.trash') }}">
+                <a class="border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75" href="{{ route('spot.trash') }}">
                   {{ __('Archived Data') }}
-                </a> --}}
+                </a>
                 @endcan
               </div>
               <form class="w-4/12" action="{{ route('spot.index') }}" method="GET">   
@@ -65,15 +65,15 @@
                     <th scope="col" class="px-6 py-3">
                       {{ __('Code') }}
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
                       <a href="{{ route('spot.index', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $spots->currentPage()]) }}">
                         {{ __('Name') }} {!! ($sort === 'name' ? '<span class="text-sky-600 ml-1">&#9650;</span>' : '<span class="text-sky-600 ml-1">&#9660;</span>') !!}
                       </a>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
                       {{ __('Area') }}
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
                       {{ __('Location') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -81,10 +81,7 @@
                         {{ __('Created at') }} {!! ($order === 'oldest' ? '<span class="text-sky-600 ml-1">&#9650;</span>' : '<span class="text-sky-600 ml-1">&#9660;</span>') !!}
                       </a>
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                      {{ __('Modified at') }}
-                    </th>
-                    @canany(['location edit', 'location delete'])
+                    @canany(['spot edit', 'spot delete'])
                     <th scope="col" class="px-6 py-3">
                       {{ __('Action') }}
                     </th>
@@ -100,17 +97,17 @@
                     <td scope="row" class="px-6 py-3">
                       {{ $spot->code }}
                     </td>
-                    <td scope="row" class="px-6 py-3">
+                    <td scope="row" class="px-6 py-3 whitespace-nowrap">
                       {{ $spot->name }}
                     </td>
-                    <td class="px-6 py-3">
+                    <td class="px-6 py-3 whitespace-nowrap">
                       @if ($spot->area)
                           {{ $spot->area->name }}
                       @else
                           lokasi ini belum memilikki area nya
                       @endif
                     </td>
-                    <td class="px-6 py-3">
+                    <td class="px-6 py-3 whitespace-nowrap">
                       @if ($spot->location)
                           {{ $spot->location->name }}
                       @else
@@ -120,14 +117,11 @@
                     <td class="px-6 py-3">
                       {{ Carbon\Carbon::parse($spot->created_at)->format('l, d F Y, H:i A') }}
                     </td>
-                    <td class="px-6 py-3">
-                      {{ Carbon\Carbon::parse($spot->updated_at)->format('l, d F Y, H:i A') }}
-                    </td>
                     <td class="flex items-center px-6 py-3 space-x-3">
                       <a href="{{ route('spot.show', $spot->id) }}" class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
                         {{ __('Show') }}
                       </a>
-                      @canany(['location edit', 'location delete'])
+                      @canany(['spot edit', 'spot delete'])
                         <a href="{{ route('spot.edit', $spot->id) }}" class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
                           {{ __('Edit') }}
                         </a>

@@ -87,6 +87,9 @@ Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth']
     Route::get('location/trash', [LocationController::class, 'trash'])->name('location.trash');
     Route::get('location/restore/{id}', [LocationController::class, 'restore'])->name('location.restore');
     Route::delete('location/destroy-permanently/{id}', [LocationController::class, 'destroyPermanently'])->name('location.destroy-permanently');
+
+    // Spot
+    Route::get('spot/trash', [SpotController::class, 'trash'])->name('spot.trash');
 });
 
 require __DIR__.'/auth.php';
