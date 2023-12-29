@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Spot extends Model
 {
     // use HasFactory;
+    use SoftDeletes;
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
