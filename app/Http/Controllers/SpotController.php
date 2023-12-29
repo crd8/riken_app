@@ -26,8 +26,6 @@ class SpotController extends Controller
         return response()->json($locations);
     }
 
-
-
     /**
      * Display a listing of the resource.
      */
@@ -107,7 +105,9 @@ class SpotController extends Controller
      */
     public function show(Spot $spot)
     {
-        //
+        $area = Area::all();
+        $location = Location::all();
+        return view('spot.show', compact('spot', 'area', 'location'));
     }
 
     /**
@@ -115,7 +115,9 @@ class SpotController extends Controller
      */
     public function edit(Spot $spot)
     {
-        //
+        $areas = Area::all();
+        $locations = Location::all();
+        return view('spot.edit', compact('spot', 'areas', 'locations'));
     }
 
     /**
@@ -123,7 +125,23 @@ class SpotController extends Controller
      */
     public function update(Request $request, Spot $spot)
     {
-        //
+        $request->validate([
+            'code' => ['required', 'string', 'max:30', 'unique:areas,code', 'unique:locations,code', 'unique:spots,code'],
+            'name' => ['required', 'string', 'max:25', 'unique:spots,name'],
+            'description' => ['required'],
+            'area_id' => ['required'],
+            'location_id' => ['required']
+        ]);
+
+        $spot->update([
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'area_id' => $request->area_id,
+            'location_id' => $request->location_id
+        ]);
+
+        return redirect()->route('spot.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: data has been successfully updated.");
     }
 
     /**
@@ -131,6 +149,9 @@ class SpotController extends Controller
      */
     public function destroy(Spot $spot)
     {
-        //
+        $nameSpot = $spot->name;
+        $spot->delete();
+
+        return redirect()->route('spot.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameSpot}</span> has been archived: Open the archive to view or restore it.");
     }
 }

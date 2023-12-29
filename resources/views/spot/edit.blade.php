@@ -37,18 +37,19 @@
               </div>
               @endif
             </div>
-            <form action="{{ route('spot.store') }}" method="POST" x-data="{ areas: {{ $areas->toJson() }}, locations: [], selectedArea: '', selectedLocation: '' }">
+            <form action="{{ route('spot.update', $spot->id) }}" method="POST" x-data="{ areas: {{ $areas->toJson() }}, locations: [], selectedArea: '', selectedLocation: '' }">
               @csrf
+              @method('PUT')
               <div class="mt-6">
                 <label for="code" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Location Code</label>
-                <input type="text" id="code" name="code" value="{{ old('code') }}" class="dark:bg-gray-700 text-sm w-6/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required autofocus>
+                <input type="text" id="code" name="code" value="{{ old('code', $spot->code) }}" class="dark:bg-gray-700 text-sm w-6/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required autofocus>
                 @foreach ($errors->get('code') as $error)
                   <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
                 @endforeach
               </div>
               <div class="mt-6">
                 <label for="name" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Location Name</label>
-                <input type="text" id="name" name="name" value="{{ old('name') }}" class="dark:bg-gray-700 text-sm w-6/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required autofocus>
+                <input type="text" id="name" name="name" value="{{ old('name', $spot->name) }}" class="dark:bg-gray-700 text-sm w-6/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required autofocus>
                 @foreach ($errors->get('name') as $error)
                   <span class="block text-xs mt-0.5 text-red-600 dark:text-red-700">{{ $error }}</span>
                 @endforeach
@@ -74,11 +75,11 @@
               </div>
               <div class="mt-6">
                 <label for="description" class="block mb-1.5 text-sm text-gray-800 dark:text-gray-200">Description</label>
-                <textarea name="description" id="description" rows="4" class="dark:bg-gray-700 text-sm w-11/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>{{ old('description') }}</textarea>
+                <textarea name="description" id="description" rows="4" class="dark:bg-gray-700 text-sm w-11/12 text-gray-700 dark:text-gray-200 py-2 border-b-2 border-gray-400/30 dark:border-gray-600/30 border-b-gray-400 dark:border-b-gray-500 rounded focus:ring-0 focus:border-t-gray-400/30 focus:border-b-2 focus:border-b-sky-600 dark:focus:border-b-gray-200 focus:border-x-gray-400/30" required>{{ old('description', $spot->description) }}</textarea>
                 <x-input-error class="mt-2" :messages="$errors->get('description')" />
               </div>
               <button type="submit" class="mt-6 border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">
-                {{ __('Save Spot') }}
+                {{ __('Update Spot') }}
               </button>
             </form>
           </section>
