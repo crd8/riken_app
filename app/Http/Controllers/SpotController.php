@@ -154,4 +154,62 @@ class SpotController extends Controller
 
         return redirect()->route('spot.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameSpot}</span> has been archived: Open the archive to view or restore it.");
     }
+
+    public function trash()
+    {
+        $spots = (new Spot)->newQuery();
+        if (request()->has('search')) {
+            $searchTerm = request()->input('search');
+            $spots->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'Like', '%' . $searchTerm . '%')->orWhere('location_id', 'Like', '%' . $searchTerm . '%');
+            });
+        }
+
+        $sort = request()->query('sort', 'name');
+        if (request()->query('sort')) {
+            $attribute = request()->query('sort');
+            $sort_order = 'ASC';
+            if (strncmp($attribute, '-', 1) === 0) {
+                $sort_order = 'DESC';
+                $attribute = substr($attribute, 1);
+            }
+            $spots->orderBy($attribute, $sort_order);
+        }
+
+        $order = request()->query('order', 'latest');
+        if ($order === 'oldest') {
+            $spots->oldest('created_at');
+        } else {
+            $spots->latest('created_at');
+        }
+
+        $spots = $spots->onlyTrashed()->paginate(10);
+        $currentPage = $spots->currentPage();
+        $perPage = $spots->PerPage();
+        $startNumber = ($currentPage - 1) * $perPage + 1;
+
+        return view('spot.trash', compact('spots', 'sort', 'order', 'startNumber'));
+    }
+
+    public function restore($id)
+    {
+        $spot = Spot::withTrashed()->find($id);
+        $nameSpot = $spot->name;
+
+        if ($spot) {
+            $spot->restore();
+            return redirect()->route('spot.index')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameSpot}</span> has been restored, data is now active again in the system.");
+        }
+    }
+
+    public function destroyPermanently($id)
+    {
+        $spot = Spot::withTrashed()->find($id);
+        $nameSpot = $spot->name;
+
+        if ($spot) {
+            $spot->forceDelete();
+            return redirect()->route('spot.trash')->with('message', "<span class='uppercase text-sky-600 font-semibold'>Information</span>: The data with the name <span class='uppercase text-gray-700 dark:text-gray-200 font-semibold'>{$nameSpot}</span> has been restored, data is now active again in the system.");
+        }
+    }
 }

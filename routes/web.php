@@ -90,6 +90,8 @@ Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth']
 
     // Spot
     Route::get('spot/trash', [SpotController::class, 'trash'])->name('spot.trash');
+    Route::get('spot/restore/{id}', [SpotController::class, 'restore'])->name('spot.restore');
+    Route::delete('spot/destroy-permanently/{id}', [SpotController::class, 'destroyPermanently'])->name('spot.destroy-permanently');
 });
 
 require __DIR__.'/auth.php';
