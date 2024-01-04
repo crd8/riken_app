@@ -111,8 +111,8 @@
       </li>
 
       <li>
-        <button type="button" class="{{ request()->routeIs('location.index', 'location.create', 'location.edit', 'location.show', 'location.trash') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-mapping-layout" data-collapse-toggle="dropdown-mapping-layout">
-          <svg class="{{ request()->routeIs('location.index', 'location.create', 'location.edit', 'location.show', 'location.trash') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+        <button type="button" class="{{ request()->routeIs('location.index', 'location.create', 'location.edit', 'location.show', 'location.trash', 'spot.index', 'spot.create', 'spot.edit', 'spot.show', 'spot.trash') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-mapping-layout" data-collapse-toggle="dropdown-mapping-layout">
+          <svg class="{{ request()->routeIs('location.index', 'location.create', 'location.edit', 'location.show', 'location.trash', 'spot.index', 'spot.create', 'spot.edit', 'spot.show', 'spot.trash') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
             <path d="M8 0a7.992 7.992 0 0 0-6.583 12.535 1 1 0 0 0 .12.183l.12.146c.112.145.227.285.326.4l5.245 6.374a1 1 0 0 0 1.545-.003l5.092-6.205c.206-.222.4-.455.578-.7l.127-.155a.934.934 0 0 0 .122-.192A8.001 8.001 0 0 0 8 0Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
           </svg>
           <span class="flex-1 ml-3 text-left whitespace-nowrap">Mapping</span>
@@ -127,7 +127,7 @@
             </a>
           </li>
           <li>
-            <a href="{{ route('spot.index') }}" class="{{ request()->routeIs('') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+            <a href="{{ route('spot.index') }}" class="{{ request()->routeIs('spot.index', 'spot.create', 'spot.edit', 'spot.show', 'spot.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Spots') }}
             </a>
           </li>

@@ -170,7 +170,7 @@
     <div class="relative w-full max-w-xl max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div>
-          <div class="p-8">
+          <div class="p-8"> 
             <h1 class="text-gray-800 dark:text-gray-300 text-md font-semibold mb-2">Delete this <span class="font-bold underline text-gray-950 dark:text-gray-200">{{ $spot->name }}</span>?</h1>
             <p class="text-sm text-gray-800 dark:text-gray-300">Performing this action will delete the data. Are you certain you wish to proceed with deleting the data associated with the specified name? Once the data is deleted, it cannot be recovered.</p>
           </div>
