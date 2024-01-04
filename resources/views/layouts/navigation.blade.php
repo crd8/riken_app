@@ -58,6 +58,7 @@
           <span class="ml-3">Dashboard</span>
         </a>
       </li>
+      @canany(['permission list', 'role list', 'user list'])
       <li>
         <button type="button" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'permission.trash', 'role.index', 'role.create', 'role.edit', 'role.show', 'role.trash', 'user.index', 'user.create', 'user.edit', 'user.show', 'user.trash') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-administrator" data-collapse-toggle="dropdown-administrator">
           <svg class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'permission.trash', 'role.index', 'role.create', 'role.edit', 'role.show', 'role.trash', 'user.index', 'user.create', 'user.edit', 'user.show', 'user.trash') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
@@ -69,23 +70,31 @@
           </svg>
         </button>
         <ul id="dropdown-administrator" class="hidden py-2 space-y-2">
+          @can('permission list')
           <li>
             <a href="{{ route('permission.index') }}" class="{{ request()->routeIs('permission.index', 'permission.create', 'permission.edit', 'permission.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Permissions') }}
             </a>
           </li>
+          @endcan
+          @can('role list')
           <li>
             <a href="{{ route('role.index') }}" class="{{ request()->routeIs('role.index', 'role.create', 'role.edit', 'role.show', 'role.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Roles') }}
             </a>
           </li>
+          @endcan
+          @can('user list')
           <li>
             <a href="{{ route('user.index') }}" class="{{ request()->routeIs('user.index', 'user.create', 'user.edit', 'user.show', 'user.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Users') }}
             </a>
           </li>
+          @endcan
         </ul>
       </li>
+      @endcanany
+      @canany(['department list', 'area list'])
       <li>
         <button type="button" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show', 'department.trash', 'area.index', 'area.create', 'area.edit', 'area.show', 'area.trash') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-business-layout" data-collapse-toggle="dropdown-business-layout">
           <svg class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show', 'department.trash', 'area.index', 'area.create', 'area.edit', 'area.show', 'area.trash') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
@@ -97,19 +106,24 @@
           </svg>
         </button>
         <ul id="dropdown-business-layout" class="hidden py-2 space-y-2">
+          @can('department list')
           <li>
             <a href="{{ route('department.index') }}" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show', 'department.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Departments') }}
             </a>
           </li>
+          @endcan
+          @can('area list')
           <li>
             <a href="{{ route('area.index') }}" class="{{ request()->routeIs('area.index', 'area.create', 'area.edit', 'area.show', 'area.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Areas') }}
             </a>
           </li>
+          @endcan
         </ul>
       </li>
-
+      @endcanany
+      @canany(['location list', 'spot list'])
       <li>
         <button type="button" class="{{ request()->routeIs('location.index', 'location.create', 'location.edit', 'location.show', 'location.trash', 'spot.index', 'spot.create', 'spot.edit', 'spot.show', 'spot.trash') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-mapping-layout" data-collapse-toggle="dropdown-mapping-layout">
           <svg class="{{ request()->routeIs('location.index', 'location.create', 'location.edit', 'location.show', 'location.trash', 'spot.index', 'spot.create', 'spot.edit', 'spot.show', 'spot.trash') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
@@ -121,18 +135,23 @@
           </svg>
         </button>
         <ul id="dropdown-mapping-layout" class="hidden py-2 space-y-2">
+          @can('location list')
           <li>
             <a href="{{ route('location.index') }}" class="{{ request()->routeIs('location.index', 'location.create', 'location.edit', 'location.show', 'location.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Locations') }}
             </a>
           </li>
+          @endcan
+          @can('spot list')
           <li>
             <a href="{{ route('spot.index') }}" class="{{ request()->routeIs('spot.index', 'spot.create', 'spot.edit', 'spot.show', 'spot.trash') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
               {{ __('Spots') }}
             </a>
           </li>
+          @endcan
         </ul>
       </li>
+      @endcanany
       {{-- <li>
         <a href="{{ route('department.index') }}" class="{{ request()->routeIs('department.index') ? 'flex items-center p-2 text-white rounded-lg dark:text-white bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:hover:bg-sky-600 group pointer-events-none' : 'flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group' }} ">
           <svg class="{{ request()->routeIs('department.index') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
