@@ -57,6 +57,10 @@ Route::prefix('mapping')->namespace('App\Http\Controllers')->middleware(['auth']
     Route::resource('spot', SpotController::class);
 });
 
+Route::prefix('asset')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
+    Route::resource('assetcategorie', AssetCategorieController::class);
+});
+
 Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
     // Department
     Route::get('department/trash', [DepartmentController::class, 'trash'])->name('department.trash');
@@ -92,6 +96,9 @@ Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth']
     Route::get('spot/trash', [SpotController::class, 'trash'])->name('spot.trash');
     Route::get('spot/restore/{id}', [SpotController::class, 'restore'])->name('spot.restore');
     Route::delete('spot/destroy-permanently/{id}', [SpotController::class, 'destroyPermanently'])->name('spot.destroy-permanently');
+
+    // Asset Categorie
+    Route::get('assetcategorie/trash', [AssetCategorieController::class, 'trash'])->name('assetcategorie.trash');
 });
 
 require __DIR__.'/auth.php';

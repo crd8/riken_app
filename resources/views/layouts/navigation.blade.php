@@ -94,6 +94,28 @@
         </ul>
       </li>
       @endcanany
+      {{-- @canany(['permission list', 'role list', 'user list']) --}}
+      <li>
+        <button type="button" class="{{ request()->routeIs('assetcategorie.index') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-asset" data-collapse-toggle="dropdown-asset">
+          <svg class="{{ request()->routeIs('assetcategorie.index') ? 'flex-shrink-0 w-5 h-5 text-white transition duration-75 group-hover:text-white dark:text-white dark:group-hover:text-white' : 'flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-white' }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+            <path d="M15.045.007 9.31 0a1.965 1.965 0 0 0-1.4.585L.58 7.979a2 2 0 0 0 0 2.805l6.573 6.631a1.956 1.956 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 18 8.479v-5.5A2.972 2.972 0 0 0 15.045.007Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
+          </svg>
+          <span class="flex-1 ml-3 text-left whitespace-nowrap">Asset</span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+        </button>
+        <ul id="dropdown-asset" class="hidden py-2 space-y-2">
+          @can('asset categorie list')
+          <li>
+            <a href="{{ route('assetcategorie.index') }}" class="{{ request()->routeIs('assetcategorie.index') ? 'flex items-center w-full p-2 text-sky-700 transition duration-75 rounded-lg pl-10 group dark:text-sky-600 pointer-events-none' : 'flex items-center w-full p-2 text-gray-600 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}">
+              {{ __('Categorie') }}
+            </a>
+          </li>
+          @endcan
+        </ul>
+      </li>
+      {{-- @endcanany --}}
       @canany(['department list', 'area list'])
       <li>
         <button type="button" class="{{ request()->routeIs('department.index', 'department.create', 'department.edit', 'department.show', 'department.trash', 'area.index', 'area.create', 'area.edit', 'area.show', 'area.trash') ? 'flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group bg-sky-700 dark:bg-sky-600 hover:bg-sky-700 dark:text-white dark:hover:bg-sky-600' : 'flex items-center w-full p-2 text-base text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700' }}" aria-controls="dropdown-business-layout" data-collapse-toggle="dropdown-business-layout">
