@@ -6,24 +6,19 @@
           <section>
             <header class="max-w-xl">
               <h2 class="text-gray-800 text-lg font-semibold dark:text-gray-200">
-                {{ __('List of Asset Category') }}
+                {{ __('List of deleted Asset Categories') }}
               </h2>
               <p class="text-sm text-gray-700 dark:text-gray-300">
-                {{ __('This list all the Category of asset available in the system.') }}
+                {{ __('This list lists all the asset categorie are deleted in the system.') }}
               </p>
             </header>
             <div class="flex justify-between items-center mt-7">
               <div>
-                @can('assetcategorie create')
-                <a class="border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75" href="{{ route('assetcategorie.create') }}">
-                  {{ __('Add a New Asset Category') }}
+                <a class="border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75" href="{{ route('assetcategorie.index') }}">
+                  {{ __('Back to All Active Asset Categorie') }}
                 </a>
-                <a class="border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2.5 mr-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75" href="{{ route('assetcategorie.trash') }}">
-                  {{ __('Archived Data') }}
-                </a>
-                @endcan
               </div>
-              <form class="w-4/12" action="{{ route('assetcategorie.index') }}" method="GET">   
+              <form class="w-4/12" action="{{ route('assetcategorie.trash') }}" method="GET">   
                 <label for="default-search" class="mb-2 text-sm text-gray-900 sr-only dark:text-white">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -37,6 +32,7 @@
               </form>
             </div>
             <div>
+              
               @if (session()->has('message'))
               <div id="toast-success" class="z-20 fixed bottom-5 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
                 <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-sky-500 bg-sky-100 rounded-lg dark:bg-sky-800 dark:text-sky-200">
@@ -63,7 +59,7 @@
                       {{ __('#') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      <a href="{{ route('assetcategorie.index', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $asset_categories->currentPage()]) }}">
+                      <a href="{{ route('assetcategorie.trash', ['sort' => ($sort === 'name' ? '-name' : 'name'), 'page' => $asset_categories->currentPage()]) }}">
                         {{ __('Name') }} {!! ($sort === 'name' ? '<span class="text-sky-600 ml-1">&#9650;</span>' : '<span class="text-sky-600 ml-1">&#9660;</span>') !!}
                       </a>
                     </th>
@@ -71,7 +67,7 @@
                       {{ __('Description') }}
                     </th>
                     <th scope="col" class="px-6 py-3">
-                      <a href="{{ route('assetcategorie.index', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $asset_categories->currentPage()]) }}">
+                      <a href="{{ route('assetcategorie.trash', ['order' => ($order === 'oldest' ? 'latest' : 'oldest'), 'page' => $asset_categories->currentPage()]) }}">
                         {{ __('Created at') }} {!! ($order === 'oldest' ? '<span class="text-sky-600 ml-1">&#9650;</span>' : '<span class="text-sky-600 ml-1">&#9660;</span>') !!}
                       </a>
                     </th>
@@ -88,32 +84,31 @@
                 <tbody>
                   @foreach ($asset_categories as $asset_categorie)
                   <tr class="bg-gray-100 border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-200/70 dark:hover:bg-gray-800/60">
-                    <td scope="row" class="px-6 py-3">
+                    <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white">
                       {{ $startNumber++ }}
                     </td>
-                    <td scope="row" class="px-6 py-3">
+                    <td class="px-6 py-3">
                       {{ $asset_categorie->name }}
                     </td>
-                    <td scope="row" class="px-6 py-3">
+                    <td class="px-6 py-3">
                       {{ $asset_categorie->description }}
                     </td>
                     <td class="px-6 py-3">
                       {{ Carbon\Carbon::parse($asset_categorie->created_at)->format('l, d F Y, H:i A') }}
                     </td>
                     <td class="px-6 py-3">
-                      {{ Carbon\Carbon::parse($asset_categorie->updated_at)->format('l, d F Y, H:i A') }}
+                      {{ Carbon\Carbon::parse($asset_categorie->deleted_at)->format('l, d F Y, H:i A') }}
                     </td>
                     <td class="flex items-center px-6 py-3 space-x-3">
-                      {{-- <a href="{{ route('assetcategorie.show', $asset_categorie->id) }}" class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
-                        {{ __('Show') }}
-                      </a> --}}
-                      @canany(['asset categorie edit', 'asset categorie delete'])
-                        <a href="{{ route('assetcategorie.edit', $asset_categorie->id) }}" class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg">
-                          {{ __('Edit') }}
-                        </a>
-                        <button class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal{{ $asset_categorie->id }}" data-modal-target="popup-modal{{ $asset_categorie->id }}">
-                          {{ __('Archive') }}
-                        </button>
+                      @canany(['asset categorie create'])
+                      <button class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-restore{{ $asset_categorie->id }}" data-modal-target="popup-modal-restore{{ $asset_categorie->id }}">
+                        {{ __('Restore') }}
+                      </button>
+                      @endcanany
+                      @canany(['asset categorie delete'])
+                      <button class="text-sm border border-gray-500/40 dark:border-gray-500 dark:hover:border-gray-400 hover:border-gray-400 px-1 py-0.5 rounded-lg" data-modal-toggle="popup-modal-destroy{{ $asset_categorie->id }}" data-modal-target="popup-modal-destroy{{ $asset_categorie->id }}">
+                        {{ __('Delete') }}
+                      </button>
                       @endcanany
                     </td>
                   </tr>
@@ -131,28 +126,55 @@
   </div>
   {{-- Modal --}}
   @foreach ($asset_categories as $asset_categorie)
-  <div id="popup-modal{{ $asset_categorie->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div id="popup-modal-restore{{ $asset_categorie->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full box-border">
     <div class="relative w-full max-w-xl max-h-full">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <div>
           <div class="p-8">
-            <h1 class="text-gray-900 dark:text-gray-300 text-md font-semibold mb-2">Archive this <span class="font-bold underline text-gray-950 dark:text-gray-200">{{ $asset_categorie->name }}</span>?</h1>
-            <p class="text-sm text-gray-800 dark:text-gray-300">Performing this action will archive the data. Are you certain you wish to proceed with archiving the data associated with the specified name? You will have the option to either restore or permanently delete the data later.</p>
+            <h1 class="text-gray-800 dark:text-gray-300 text-md font-semibold mb-2">Restore this <span class="font-bold underline text-gray-950 dark:text-gray-200">{{ $asset_categorie->name }}</span>?</h1>
+            <p class="text-sm text-gray-800 dark:text-gray-300">Performing this action will restore the data. Are you certain you wish to proceed with restoring the data associated with the specified name?</p>
+          </div>
+          <div>
+            <div class="bg-gray-100 dark:bg-gray-700 border-t dark:border-t-gray-600 rounded-b-md">
+              <div class="py-3 inline-flex w-full mt-3 gap-4 px-8">
+                <div class="basis-1/2">
+                  <a href="{{ route('assetcategorie.restore', $asset_categorie->id) }}" class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-green-500 rounded text-sm font-semibold px-5 py-2 mb-2 inline-flex items-center justify-center focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">
+                    Yes, restore
+                  </a>
+                </div>
+                <div class="basis-1/2">
+                  <button data-modal-hide="popup-modal-restore{{ $asset_categorie->id }}" type="button" class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2 mb-2 inline-flex items-center justify-center focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">No, cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup-modal-destroy{{ $asset_categorie->id }}" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-xl max-h-full">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div>
+          <div class="p-8">
+            <h1 class="text-gray-800 dark:text-gray-300 text-md font-semibold mb-2">Delete this <span class="font-bold underline text-gray-950 dark:text-gray-200">{{ $asset_categorie->name }}</span>?</h1>
+            <p class="text-sm text-gray-800 dark:text-gray-300">Performing this action will delete the data. Are you certain you wish to proceed with deleting the data associated with the specified name? Once the data is deleted, it cannot be recovered.</p>
           </div>
           <div class="text-center">
             <div class="bg-gray-100 dark:bg-gray-700 border-t dark:border-t-gray-600 rounded-b-md">
               <div class="py-3 inline-flex w-full mt-3 gap-4 px-8">
                 <div class="basis-1/2">
-                  <form method="POST" action="{{ route('assetcategorie.destroy', $asset_categorie->id) }}">
+                  <form method="POST" action="{{ route('assetcategorie.destroy-permanently', $asset_categorie->id) }}">
                     @csrf
                     @method('DELETE')
-                    <button class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-yellow-600 dark:hover:text-yellow-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-yellow-500 rounded text-sm font-semibold px-5 py-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">
-                      Yes, archive
+                    <button class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-red-600 dark:hover:text-red-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-red-500 rounded text-sm font-semibold px-5 py-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">
+                      Yes, delete
                     </button>
                   </form>     
                 </div>
                 <div class="basis-1/2">
-                  <button data-modal-hide="popup-modal{{ $asset_categorie->id }}" type="button" class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">No, cancel</button>
+                  <button data-modal-hide="popup-modal-destroy{{ $asset_categorie->id }}" type="button" class="w-full border border-gray-500/40 text-gray-700 dark:text-gray-200 hover:text-sky-600 dark:hover:text-sky-50 bg-gray-50 dark:bg-gray-600 focus:ring-2 ring-offset-2 ring-offset-gray-200 dark:ring-offset-gray-900 focus:ring-sky-500 rounded text-sm font-semibold px-5 py-2 mb-2 focus:outline-none dark:focus:ring-gray-500 focus:transition focus:ease-in focus:duration-75">No, cancel</button>
                 </div>
               </div>
             </div>

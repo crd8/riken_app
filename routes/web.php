@@ -9,6 +9,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SpotController;
+use App\Http\Controllers\AssetCategorieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -99,6 +100,8 @@ Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth']
 
     // Asset Categorie
     Route::get('assetcategorie/trash', [AssetCategorieController::class, 'trash'])->name('assetcategorie.trash');
+    Route::get('assetcategorie/restore/{id}', [AssetCategorieController::class, 'restore'])->name('assetcategorie.restore');
+    Route::delete('assetcategorie/destroy-permanently/{id}', [AssetCategorieController::class, 'destroyPermanently'])->name('assetcategorie.destroy-permanently');
 });
 
 require __DIR__.'/auth.php';
