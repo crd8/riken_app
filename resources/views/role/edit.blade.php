@@ -50,6 +50,46 @@
                     @endforelse
                   </div>
                 </div>
+                {{-- Asset --}}
+                <div class="mt-6">
+                  <h3 class="text-base mb-2 text-gray-800 dark:text-gray-200">Asset Permissions</h3>
+                  <div class="grid grid-cols-1 gap-2">
+                    @forelse ($permissions as $permission)
+                      @if (str_contains($permission->name, 'asset') && !str_contains($permission->name, 'categorie'))
+                        <div class="flex bg-gray-200 dark:bg-gray-600 p-2 rounded items-center">
+                          <label>
+                            <input class="w-4 h-4 mb-1 text-sky-600 bg-gray-200 border-gray-500 rounded-sm text-xl focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-900 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Asset"> 
+                            <span class="text-sm capitalize text-gray-700 dark:text-gray-200">
+                              {{ $permission->name }}
+                            </span>
+                          </label>
+                        </div>
+                      @endif
+                    @empty
+                    ----
+                    @endforelse
+                  </div>
+                </div>
+                {{-- Asset Categorie --}}
+                <div class="mt-6">
+                  <h3 class="text-base mb-2 text-gray-800 dark:text-gray-200">Asset Categorie Permissions</h3>
+                  <div class="grid grid-cols-1 gap-2">
+                    @forelse ($permissions as $permission)
+                      @if (str_contains($permission->name, 'asset categorie'))
+                        <div class="flex bg-gray-200 dark:bg-gray-600 p-2 rounded items-center">
+                          <label>
+                            <input class="w-4 h-4 mb-1 text-sky-600 bg-gray-200 border-gray-500 rounded-sm text-xl focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-900 dark:border-gray-600" type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} data-category="Asset Categorie"> 
+                            <span class="text-sm capitalize text-gray-700 dark:text-gray-200">
+                              {{ $permission->name }}
+                            </span>
+                          </label>
+                        </div>
+                      @endif
+                    @empty
+                    ----
+                    @endforelse
+                  </div>
+                </div>
                 {{-- Department --}}
                 <div class="mt-6">
                   <h3 class="text-base mb-2 text-gray-800 dark:text-gray-200">Department Permissions</h3>

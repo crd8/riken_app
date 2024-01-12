@@ -10,6 +10,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SpotController;
 use App\Http\Controllers\AssetCategorieController;
+use App\Http\Controllers\AssetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +61,7 @@ Route::prefix('mapping')->namespace('App\Http\Controllers')->middleware(['auth']
 
 Route::prefix('asset')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
     Route::resource('assetcategorie', AssetCategorieController::class);
+    Route::resource('asset', AssetController::class);
 });
 
 Route::prefix('recycle')->namespace('App\Http\Controllers')->middleware(['auth'])->group(function() {
