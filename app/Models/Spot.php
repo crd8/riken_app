@@ -37,4 +37,13 @@ class Spot extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
+    /**
+     * relasi hasMany ke model asset
+     * 1 spot mempunyai banyak asset
+    */
+    public function asset()
+    {
+        return $this->hasMany(Asset::class);
+    }
 }
