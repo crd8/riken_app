@@ -15,9 +15,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('number');
             $table->string('name');
-            $table->string('location');
             $table->double('price');
-            $table->dateTime('purchase_date');
+            $table->date('purchase_date');
             $table->string('status');
             $table->string('owner');
             $table->text('information');

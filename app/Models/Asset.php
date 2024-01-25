@@ -17,12 +17,13 @@ class Asset extends Model
     protected $fillable = [
         'number',
         'name',
-        'location',
         'price',
         'purchase_date',
         'status',
         'owner',
         'information',
+        'assetcategorie_id',
+        'spot_id',
         'photo'
     ];
 
@@ -33,5 +34,14 @@ class Asset extends Model
     public function assetcategorie()
     {
         return $this->belongsTo(AssetCategorie::class);
+    }
+
+    /**
+     * relasi belongsTo ke model spot
+     * 1 asset hanya bisa mempunyai 1 spot
+    */
+    public function spot()
+    {
+        return $this->belongsTo(Spot::class);
     }
 }
